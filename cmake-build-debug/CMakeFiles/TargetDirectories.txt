@@ -1,3 +1,0 @@
-/Users/nathan/Documents/SU/comp-principles-2/client-server-project/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/Users/nathan/Documents/SU/comp-principles-2/client-server-project/cmake-build-debug/CMakeFiles/edit_cache.dir
-/Users/nathan/Documents/SU/comp-principles-2/client-server-project/cmake-build-debug/CMakeFiles/client-server-project.dir
