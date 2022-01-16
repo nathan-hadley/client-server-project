@@ -3,4 +3,4 @@ project(milestone1)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(milestone1 client.cpp server.cpp)
+add_executable(client-server-project client.cpp server.cpp)
