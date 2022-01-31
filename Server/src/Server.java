@@ -5,9 +5,9 @@ import java.io.*;
 public class Server
 {
     //initialize socket and input stream
-    private Socket		 socket = null;
-    private ServerSocket server = null;
-    private DataInputStream in	 = null;
+    private Socket          socket   = null;
+    private ServerSocket    server   = null;
+    private DataInputStream in       =  null;
 
     // constructor with port
     public Server(int port)
@@ -35,7 +35,7 @@ public class Server
                 try
                 {
                     line = in.readUTF();
-                    System.out.println(line);
+                    System.out.println("Message from client: " + line);
 
                 }
                 catch(IOException i)
@@ -57,8 +57,6 @@ public class Server
 
     public static void main(String args[])
     {
-        Server server = new Server(8080);
+        Server server = new Server(10307);
     }
 }
-
-
