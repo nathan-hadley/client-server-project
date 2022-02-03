@@ -4,7 +4,8 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/Users/nathan/Documents/SU/comp-principles-2/client-server-project/cpp/server/server.cpp" "/Users/nathan/Documents/SU/comp-principles-2/client-server-project/cpp/server/cmake-build-debug/CMakeFiles/server.dir/server.cpp.o"
+  "/Users/nathan/Documents/SU/comp-principles-2/client-server-project/cpp/server/RPCServer.cpp" "/Users/nathan/Documents/SU/comp-principles-2/client-server-project/cpp/server/cmake-build-debug/CMakeFiles/server.dir/RPCServer.cpp.o"
+  "/Users/nathan/Documents/SU/comp-principles-2/client-server-project/cpp/server/main.cpp" "/Users/nathan/Documents/SU/comp-principles-2/client-server-project/cpp/server/cmake-build-debug/CMakeFiles/server.dir/main.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

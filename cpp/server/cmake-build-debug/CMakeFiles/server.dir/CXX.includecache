@@ -6,7 +6,7 @@
 
 #IncludeRegexTransform: 
 
-/Users/nathan/Documents/SU/comp-principles-2/client-server-project/cpp/server/server.cpp
+/Users/nathan/Documents/SU/comp-principles-2/client-server-project/cpp/server/RPCServer.cpp
 unistd.h
 -
 stdio.h
@@ -19,4 +19,34 @@ netinet/in.h
 -
 string.h
 -
+vector
+-
+iterator
+-
+RPCServer.h
+/Users/nathan/Documents/SU/comp-principles-2/client-server-project/cpp/server/RPCServer.h
+
+/Users/nathan/Documents/SU/comp-principles-2/client-server-project/cpp/server/RPCServer.h
+unistd.h
+-
+stdio.h
+-
+sys/socket.h
+-
+stdlib.h
+-
+netinet/in.h
+-
+string.h
+-
+vector
+-
+iterator
+-
+
+/Users/nathan/Documents/SU/comp-principles-2/client-server-project/cpp/server/main.cpp
+cstdio
+-
+RPCServer.h
+/Users/nathan/Documents/SU/comp-principles-2/client-server-project/cpp/server/RPCServer.h
 

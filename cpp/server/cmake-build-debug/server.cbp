@@ -82,7 +82,13 @@
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/Users/nathan/Documents/SU/comp-principles-2/client-server-project/cpp/server/server.cpp">
+		<Unit filename="/Users/nathan/Documents/SU/comp-principles-2/client-server-project/cpp/server/RPCServer.cpp">
+			<Option target="server"/>
+		</Unit>
+		<Unit filename="/Users/nathan/Documents/SU/comp-principles-2/client-server-project/cpp/server/RPCServer.h">
+			<Option target="server"/>
+		</Unit>
+		<Unit filename="/Users/nathan/Documents/SU/comp-principles-2/client-server-project/cpp/server/main.cpp">
 			<Option target="server"/>
 		</Unit>
 		<Unit filename="/Users/nathan/Documents/SU/comp-principles-2/client-server-project/cpp/server/CMakeLists.txt">
