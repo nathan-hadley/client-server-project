@@ -1,0 +1,4 @@
+/Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_C_COMPILER=/usr/local/bin/gcc-10 -DCMAKE_CXX_COMPILER=/usr/local/bin/g++-10 -G "CodeBlocks - Unix Makefiles" /Users/nathan/Documents/SU/comp-principles-2/client-server-project/cpp/server
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /Users/nathan/Documents/SU/comp-principles-2/client-server-project/cpp/server/cmake-build-debug
