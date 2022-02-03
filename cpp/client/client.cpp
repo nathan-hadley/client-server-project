@@ -4,39 +4,111 @@
 #include <arpa/inet.h>
 #include <unistd.h>
 #include <string.h>
-#define PORT 6542
+#include <vector>
+#include <iterator>
 
-int main(int argc, char const *argv[])
+// This is a C Program. No classes. You may turn this into an Object Oriented C++ program if you wish
+
+void ParseTokens(char* buffer, std::vector<std::string>& a)
 {
-    int sock = 0, valread;
+    char* token;
+    char* rest = (char*)buffer;
+
+    while ((token = strtok_r(rest, ";", &rest)))
+    {
+        printf("%s\n", token);
+        a.push_back(token);
+    }
+
+    return;
+}
+
+/*
+    ConnectToServer will connect to the Server based on command line
+*/
+bool ConnectToServer(const char *serverAddress, int port, int & sock)
+{
     struct sockaddr_in serv_addr;
-    char *hello = (char *) "Hello from client";
-    char buffer[1024] = {0};
     if ((sock = socket(AF_INET, SOCK_STREAM, 0)) < 0)
     {
         printf("\n Socket creation error \n");
-        return -1;
+        return false;
     }
 
     serv_addr.sin_family = AF_INET;
-    serv_addr.sin_port = htons(PORT);
+    serv_addr.sin_port = htons(port);
 
     // Convert IPv4 and IPv6 addresses from text to binary form
-    if(inet_pton(AF_INET, "127.0.0.1", &serv_addr.sin_addr)<=0)
+    if (inet_pton(AF_INET, serverAddress, &serv_addr.sin_addr) <= 0)
     {
         printf("\nInvalid address/ Address not supported \n");
-        return -1;
+        return false;
     }
 
-    if (connect(sock, (struct sockaddr *)&serv_addr, sizeof(serv_addr)) < 0)
+    if (connect(sock, (struct sockaddr*)&serv_addr, sizeof(serv_addr)) < 0)
     {
         printf("\nConnection Failed \n");
-        return -1;
+        return false;
     }
-    send(sock , hello , strlen(hello) , 0 );
-    printf("Hello message sent\n");
-    valread = read( sock , buffer, 1024);
-    printf("%s\n",buffer );
-    return 0;
+
+    return true;
 }
 
+int main(int argc, char const* argv[])
+{
+    int sock = 0;
+    struct sockaddr_in serv_addr;
+    const char* connectRPC = "connect;MIKE;MIKE;";
+    const char* statusRPC = "status;";
+    const char* logoffRPC = "disconnect;";
+    char buffer[1024] = { 0 };
+    const char *serverAddress = argv[1];
+    const int port = atoi(argv[2]);
+
+    bool bConnect = ConnectToServer(serverAddress, port, sock);
+
+    if (bConnect == true)
+    {
+        strcpy(buffer, connectRPC);
+        int nlen = strlen(buffer);
+        buffer[nlen] = 0;   // Put the null terminator
+        int valwrite = send(sock, buffer, strlen(buffer)+1, 0);
+
+        printf("Connect message sent with %d bytes\n", valwrite);
+
+        int valread = read(sock, buffer, 1024);
+        printf("Return response = %s with valread=%d\n", buffer, valread);
+
+
+
+    }
+    else
+    {
+        printf("Exit without calling RPC");
+    }
+
+
+    // Do a Disconnect Message
+
+    if (bConnect == true)
+    {
+        strcpy(buffer, logoffRPC);
+        int nlen = strlen(buffer);
+        buffer[nlen] = 0;   // Put the null terminator
+        int valwrite = send(sock, buffer, strlen(buffer) + 1, 0);
+
+        printf("DisConnect message sent with %d bytes\n", valwrite);
+
+        int valread = read(sock, buffer, 1024);
+        printf("Return response = %s with valread=%d\n", buffer, valread);
+    }
+    else
+    {
+        printf("Exit without calling RPC");
+    }
+
+    // Terminate connection
+    close(sock);
+
+    return 0;
+}
