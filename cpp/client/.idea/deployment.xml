@@ -2,15 +2,16 @@
 <project version="4">
   <component name="PublishConfigData" serverName="SU" remoteFilesAllowedToDisappearOnAutoupload="false">
     <serverData>
-      <paths name="Remote Host (7bcd1841-3f41-4cde-a313-97f6d0441397)">
+      <paths name="SU (7bcd1841-3f41-4cde-a313-97f6d0441397)">
         <serverdata>
           <mappings>
-            <mapping deploy="/tmp/tmp.rt2EIPBvJo" local="$PROJECT_DIR$" />
+            <mapping deploy="/" local="$PROJECT_DIR$" />
           </mappings>
           <excludedPaths>
             <excludedPath local="true" path="$PROJECT_DIR$/cmake-build-debug-remote-host" />
             <excludedPath local="true" path="$PROJECT_DIR$/cmake-build-debug-remote" />
             <excludedPath local="true" path="$PROJECT_DIR$/cmake-build-debug" />
+            <excludedPath local="true" path="$PROJECT_DIR$/cmake-build-debug-su" />
           </excludedPaths>
         </serverdata>
       </paths>

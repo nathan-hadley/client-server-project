@@ -8,7 +8,8 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/tmp/tmp.rt2EIPBvJo/client.cpp" "/tmp/tmp.rt2EIPBvJo/cmake-build-debug-remote-host/CMakeFiles/client.dir/client.cpp.o"
+  "/tmp/tmp.HracxZ5BHo/RPCServer.cpp" "/tmp/tmp.HracxZ5BHo/cmake-build-debug/CMakeFiles/server.dir/RPCServer.cpp.o"
+  "/tmp/tmp.HracxZ5BHo/main.cpp" "/tmp/tmp.HracxZ5BHo/cmake-build-debug/CMakeFiles/server.dir/main.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

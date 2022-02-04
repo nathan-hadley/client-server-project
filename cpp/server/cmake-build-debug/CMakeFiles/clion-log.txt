@@ -1,4 +1,4 @@
-/usr/bin/cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_DEPENDS_USE_COMPILER=FALSE -G "CodeBlocks - Unix Makefiles" /tmp/tmp.rt2EIPBvJo
+/usr/bin/cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_DEPENDS_USE_COMPILER=FALSE -G "CodeBlocks - Unix Makefiles" /tmp/tmp.HracxZ5BHo
 -- The C compiler identification is GNU 8.5.0
 -- The CXX compiler identification is GNU 8.5.0
 -- Detecting C compiler ABI info
@@ -13,4 +13,4 @@
 -- Detecting CXX compile features - done
 -- Configuring done
 -- Generating done
--- Build files have been written to: /tmp/tmp.rt2EIPBvJo/cmake-build-debug-remote-host
+-- Build files have been written to: /tmp/tmp.HracxZ5BHo/cmake-build-debug
