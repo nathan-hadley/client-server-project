@@ -18,7 +18,7 @@ int main(int argc, char const* argv[])
     // Print it out
 
     statusOk = serverObj->StartServer();
-    printf("Endless loop, as server is up always");
+    printf("Endless loop, as server is up always\n");
     while (statusOk)
     {
         statusOk = serverObj->ListenForClient();

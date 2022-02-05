@@ -13,10 +13,16 @@
 
 using namespace std;
 
-RPCServer::RPCServer(const char *serverIP, int port)
+/*
+    Constructor for RPCSergver
+    Input:
+            serverIP: The IP of the server
+            port: The port the server will be listening on
+*/
+RPCServer::RPCServer(const char* serverIP, int port)
 {
     m_rpcCount = 0;
-    m_serverIP = (char *) serverIP;
+    m_serverIP = (char*)serverIP;
     m_port = port;
 };
 
@@ -41,7 +47,7 @@ bool RPCServer::StartServer()
 
     // Forcefully attaching socket to the port 8080
     if (setsockopt(m_server_fd, SOL_SOCKET, SO_REUSEADDR | SO_REUSEPORT,
-                   &opt, sizeof(opt)))
+        &opt, sizeof(opt)))
     {
         perror("setsockopt");
         exit(EXIT_FAILURE);
@@ -53,7 +59,7 @@ bool RPCServer::StartServer()
 
     // Forcefully attaching socket to the port 8080
     if (bind(m_server_fd, (struct sockaddr*)&m_address,
-             sizeof(m_address)) < 0)
+        sizeof(m_address)) < 0)
     {
         perror("bind failed");
         exit(EXIT_FAILURE);
@@ -78,7 +84,7 @@ bool RPCServer::ListenForClient()
     int addrlen = sizeof(m_address);
 
     if ((m_socket = accept(m_server_fd, (struct sockaddr*)&m_address,
-                           (socklen_t*)&addrlen)) < 0)
+        (socklen_t*)&addrlen)) < 0)
     {
         perror("accept");
         exit(EXIT_FAILURE);
@@ -93,10 +99,10 @@ bool RPCServer::ListenForClient()
 * The delimter will be a ;
 * An example buffer could be "connect;mike;mike;"
 */
-void RPCServer::ParseTokens(char * buffer, std::vector<std::string> & a)
+void RPCServer::ParseTokens(char* buffer, std::vector<std::string>& a)
 {
     char* token;
-    char* rest = (char *) buffer;
+    char* rest = (char*)buffer;
 
     while ((token = strtok_r(rest, ";", &rest)))
     {
@@ -112,7 +118,7 @@ void RPCServer::ParseTokens(char * buffer, std::vector<std::string> & a)
 */
 bool RPCServer::ProcessRPC()
 {
-    const char* rpcs[] = { "connect", "disconnect", "status"};
+    const char* rpcs[] = { "connect", "disconnect", "status" };
     char buffer[1024] = { 0 };
     std::vector<std::string> arrayTokens;
     int valread = 0;
@@ -138,7 +144,11 @@ bool RPCServer::ProcessRPC()
         for (vector<string>::iterator t = arrayTokens.begin(); t != arrayTokens.end(); ++t)
         {
             printf("Debugging our tokens\n");
-            printf("token = %s\n", t);
+            string x = *t;
+            char* token = (char*)malloc(x.size() + 1);
+            memcpy(token, x.c_str(), x.size() + 1);
+            printf("token = %s\n", token);
+            free(token);
         }
 
         // string statements are not supported with a switch, so using if/else logic to dispatch
@@ -171,7 +181,7 @@ bool RPCServer::ProcessRPC()
     return true;
 }
 
-bool RPCServer::ProcessConnectRPC(std::vector<std::string> & arrayTokens)
+bool RPCServer::ProcessConnectRPC(std::vector<std::string>& arrayTokens)
 {
     const int USERNAMETOKEN = 1;
     const int PASSWORDTOKEN = 2;
@@ -182,7 +192,7 @@ bool RPCServer::ProcessConnectRPC(std::vector<std::string> & arrayTokens)
     char szBuffer[80];
 
     // Our Authentication Logic. Looks like Mike/Mike is only valid combination
-    if ((userNameString == "MIKE") && (passwordString == "MIKE"))
+    if ((userNameString == "USERNAME") && (passwordString == "PASSWORD1234"))
     {
         strcpy(szBuffer, "1;"); // Connected
     }
@@ -218,4 +228,3 @@ bool RPCServer::ProcessDisconnectRPC()
     send(this->m_socket, szBuffer, strlen(szBuffer) + 1, 0);
     return true;
 }
-
