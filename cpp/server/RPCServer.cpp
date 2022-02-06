@@ -182,12 +182,12 @@ bool RPCServer::ProcessConnectRPC(std::vector<std::string>& arrayTokens)
     const int PASSWORDTOKEN = 2;
 
     // Strip out tokens 1 and 2 (username, password)
-    string userNameString = arrayTokens[USERNAMETOKEN];
+    string usernameString = arrayTokens[USERNAMETOKEN];
     string passwordString = arrayTokens[PASSWORDTOKEN];
     char szBuffer[80];
 
     // Our Authentication Logic. Looks like Mike/Mike is only valid combination
-    if ((userNameString == "USERNAME") && (passwordString == "PASSWORD1234"))
+    if ((usernameString == "USERNAME") && (passwordString == "PASSWORD1234"))
     {
         strcpy(szBuffer, "1;"); // Connected
     }
