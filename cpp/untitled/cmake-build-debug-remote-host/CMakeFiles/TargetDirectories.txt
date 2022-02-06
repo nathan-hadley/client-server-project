@@ -1,3 +1,0 @@
-/tmp/tmp.Apmu9BxRBU/cmake-build-debug-remote-host/CMakeFiles/rebuild_cache.dir
-/tmp/tmp.Apmu9BxRBU/cmake-build-debug-remote-host/CMakeFiles/untitled.dir
-/tmp/tmp.Apmu9BxRBU/cmake-build-debug-remote-host/CMakeFiles/edit_cache.dir
