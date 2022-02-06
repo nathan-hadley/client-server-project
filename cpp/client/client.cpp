@@ -4,12 +4,10 @@
 #include <arpa/inet.h>
 #include <unistd.h>
 #include <string.h>
-#include <string.h>
 #include <vector>
 #include <iterator>
 #include <iostream>
-
-// This is a C Program. No classes. You may turn this into an Object Oriented C++ program if you wish
+using namespace std;
 
 /*
     ParseTokens splits a string deliminates by semi-colons and adds all strings to the input vector
@@ -68,8 +66,7 @@ bool ConnectToServer(const char* serverAddress, int port, int& sock)
     return true;
 }
 
-int main(int argc, char const* argv[])
-{
+int main(int argc, char const* argv[]) {
     int sock = 0;
     struct sockaddr_in serv_addr;
     //const char* connectRPC = "connect;MIKE;MIKE;"; // Initial contents for connect RPC
@@ -79,59 +76,54 @@ int main(int argc, char const* argv[])
     const char* serverAddress = argv[1]; // Takes first command line argument, which should be the IP address of the server
     const int port = atoi(argv[2]); // Takes second command line argument, which should be the port the server is listening on
 
-    
-
-
     bool bConnect = ConnectToServer(serverAddress, port, sock);
 
-    if (bConnect == true)
-    {
-        std::string username;
-        std::cout << "Enter your username: ";
-        std::cin >> username;
+    if (bConnect) {
+        string username, password;
+        cout << "Enter your username: ";
+        cout << "Enter your password: ";
 
-        std::string password;
-        std::cout << "Enter your password: ";
-        std::cin >> password;
+        string connectRPC = "connect;" + username + ";" + password + ";";
 
-        std::string connectRPC = "connect;" + username + ";" + password + ";";
+        // Copies the characters from connectRPC to the buffer array
+        strcpy(buffer, connectRPC.c_str());
+        int nlen = strlen(buffer);
+        // Puts the null terminator at the end of the connectRPC characters
+        buffer[nlen] = 0;
 
-        strcpy(buffer, connectRPC.c_str()); // Copies the characters from connectRPC to the buffer array
-        int nlen = strlen(buffer); 
-        buffer[nlen] = 0;   // Puts the null terminator at the end of the connectRPC characters
-
-       int valwrite = send(sock, buffer, strlen(buffer) + 1, 0); // Sends the contents of the buffer through the created socket
+        // Sends the contents of the buffer through the created socket
+        int valwrite = send(sock, buffer, strlen(buffer) + 1, 0);
 
         printf("Connect message sent with %d bytes\n", valwrite);
 
-        int valread = read(sock, buffer, 1024); // Assigns the server response to the buffer
+        // Assigns the server response to the buffer
+        int valread = read(sock, buffer, 1024);
         printf("Return response = %s with valread = %d\n", buffer, valread);
 
-
-
-    }
-    else
-    {
+    } else {
         printf("Exit without calling RPC");
     }
 
-
     // Do a Disconnect Message
+    if (bConnect) {
 
-    if (bConnect == true)
-    {
-        strcpy(buffer, logoffRPC); // Copies the contents of the logoffRPC to the buffer
+        // Copies the contents of the logoffRPC to the buffer
+        strcpy(buffer, logoffRPC);
         int nlen = strlen(buffer);
-        buffer[nlen] = 0;   // Puts the null terminator at the end of the logoffRPC characters in the buffer
-        int valwrite = send(sock, buffer, strlen(buffer) + 1, 0); // Sends the contents of the buffer through the created socket
+
+        // Put null terminator at the end of the logoffRPC characters in the buffer
+        buffer[nlen] = 0;
+
+        // Sends the contents of the buffer through the created socket
+        int valwrite = send(sock, buffer, strlen(buffer) + 1, 0);
 
         printf("Disconnect message sent with %d bytes\n", valwrite);
 
-        int valread = read(sock, buffer, 1024); // Assigns the server response to the buffer
+        // Assign the server response to the buffer
+        int valread = read(sock, buffer, 1024);
         printf("Return response = %s with valread = %d\n", buffer, valread);
-    }
-    else
-    {
+
+    } else {
         printf("Exit without calling RPC");
     }
 

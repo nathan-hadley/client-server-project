@@ -9,8 +9,6 @@
 
 #include "RPCServer.h"
 
-//#define PORT 8081
-
 using namespace std;
 
 /*
@@ -31,7 +29,6 @@ RPCServer::~RPCServer() {};
 /*
 * StartServer will create a server on a Port that was passed in, and create a socket
 */
-
 bool RPCServer::StartServer()
 {
     int opt = 1;
@@ -45,7 +42,7 @@ bool RPCServer::StartServer()
         exit(EXIT_FAILURE);
     }
 
-    // Forcefully attaching socket to the port 8080
+    // Forcefully attaching socket to the port
     if (setsockopt(m_server_fd, SOL_SOCKET, SO_REUSEADDR | SO_REUSEPORT,
         &opt, sizeof(opt)))
     {
@@ -57,7 +54,7 @@ bool RPCServer::StartServer()
     m_address.sin_addr.s_addr = INADDR_ANY;
     m_address.sin_port = htons(m_port);
 
-    // Forcefully attaching socket to the port 8080
+    // Forcefully attaching socket to the port
     if (bind(m_server_fd, (struct sockaddr*)&m_address,
         sizeof(m_address)) < 0)
     {
@@ -74,10 +71,8 @@ bool RPCServer::StartServer()
 }
 
 /*
-* Will accept a new connection by listening on it's address
-*
+* Will accept a new connection by listening on its address
 */
-
 bool RPCServer::ListenForClient()
 {
 
