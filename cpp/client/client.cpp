@@ -80,8 +80,9 @@ int main(int argc, char const* argv[]) {
 
     if (bConnect) {
         string username,
-        password;
+                password;
 
+        // NEED TO VALIDATE
         cout << "Enter your username: ";
         cin >> username;
         cout << "Enter your password: ";
