@@ -18,7 +18,7 @@ using namespace std;
 RPCServer::RPCServer(const char* serverIP, int port) {
     m_serverIP = (char*)serverIP;
     m_port = port;
-};
+}
 
 RPCServer::~RPCServer() = default;
 
@@ -79,17 +79,19 @@ bool RPCServer::ListenForClient() {
 }
 
 /*
- * Going to populate a String vector with tokens extracted from the string the
- * client sent. The delimiter will be a ";"
- * An example buffer could be "connect;mike;mike;"
+ * ParseTokens splits a string by semicolons and adds all strings to the input
+ * vector.
+ *
+ * Input:
+ *      buffer: The string to be split
+ *      a: The vector to have strings added to
 */
-void RPCServer::ParseTokens(char* buffer, std::vector<std::string>& a) {
+void RPCServer::ParseTokens(char* buffer, vector<string>& a) {
     char* token;
     char* rest = (char*)buffer;
 
     while ((token = strtok_r(rest, ";", &rest))) {
-        printf("%s\n", token);
-        a.push_back(token);
+        a.emplace_back(token);
     }
 }
 
@@ -101,45 +103,39 @@ bool RPCServer::ProcessRPC() {
     vector<string> arrayTokens;
     int valread;
     bool bConnected = false;
-    bool bStatusOk = true;
-    const int RPCTOKEN = 0;
+    const int RPC_TOKEN = 0;
     bool bContinue = true;
 
-    while ((bContinue) && (bStatusOk)) {
+    while (bContinue) {
         // Should be blocked when a new RPC has not called us yet
-        if ((valread = read(this->m_socket, buffer, sizeof(buffer))) <= 0) {
+        if ((valread = (int) read(this->m_socket, buffer, sizeof(buffer))) <= 0) {
             printf("errno is %d\n", errno);
             break;
         }
-        printf("%s\n", buffer);
 
         arrayTokens.clear();
         this->ParseTokens(buffer, arrayTokens);
 
-        // Enumerate through the tokens. The first token is always the specific
-        // RPC
-        for (auto x : arrayTokens) {
-            printf("Debugging our tokens\n");
+        // Enumerate through the tokens. The first token is always the RPC
+        for (const auto& x : arrayTokens) {
             char* token = (char*)malloc(x.size() + 1);
             memcpy(token, x.c_str(), x.size() + 1);
-            printf("token = %s\n", token);
+            printf("Token received = %s\n", token);
             free(token);
         }
 
         // String statements are not supported with a switch, so using if/else
         // logic to dispatch.
-        string aString = arrayTokens[RPCTOKEN];
+        string aString = arrayTokens[RPC_TOKEN];
 
         if (!bConnected && (aString == "connect")) {
-            bStatusOk = ProcessConnectRPC(arrayTokens);  // Connect RPC
-            if (bStatusOk)
-                bConnected = true;
+            bConnected = ProcessConnectRPC(arrayTokens);  // Connect RPC
         }
 
         else if (bConnected && (aString == "disconnect")) {
-            bStatusOk = ProcessDisconnectRPC();
+            ProcessDisconnectRPC();
             printf("Shutting down server.\n");
-            bContinue = false; // We are going to leave this loop, as we are done
+            bContinue = false; // We are going to leave this loop
 
         } else {
             printf("Error: not an RPC.\n");
@@ -148,39 +144,45 @@ bool RPCServer::ProcessRPC() {
     return true;
 }
 
-bool RPCServer::ProcessConnectRPC(std::vector<std::string>& arrayTokens) {
-    const int USERNAMETOKEN = 1;
-    const int PASSWORDTOKEN = 2;
+bool RPCServer::ProcessConnectRPC(std::vector<std::string>& arrayTokens) const {
+    const int USERNAME_TOKEN = 1;
+    const int PASSWORD_TOKEN = 2;
+    bool validLogin;
 
     // Strip out tokens 1 and 2 (username, password)
-    string usernameString = arrayTokens[USERNAMETOKEN];
-    string passwordString = arrayTokens[PASSWORDTOKEN];
+    string usernameString = arrayTokens[USERNAME_TOKEN];
+    string passwordString = arrayTokens[PASSWORD_TOKEN];
     char szBuffer[80];
 
-    // Our Authentication Logic. Looks like Mike/Mike is only valid combination
+    // Our authentication Logic.
     if ((usernameString == "USERNAME") && (passwordString == "PASSWORD1234")) {
         strcpy(szBuffer, "1;"); // Connected
+        validLogin = true;
     } else {
         strcpy(szBuffer, "0;"); // Not connected
+        validLogin = false;
     }
 
     // Send Response back on our socket
-    int nlen = strlen(szBuffer);
+    int nlen = (int) strlen(szBuffer);
     szBuffer[nlen] = 0;
-    send(this->m_socket, szBuffer, strlen(szBuffer) + 1, 0);
+    send(this->m_socket, szBuffer, (int) strlen(szBuffer) + 1, 0);
 
-    return true;
+    if (validLogin)
+        return true;
+    else
+        return false;
 }
 
 /*
  * Processes disconnectRPC.
 */
-bool RPCServer::ProcessDisconnectRPC() {
+bool RPCServer::ProcessDisconnectRPC() const {
     char szBuffer[16];
     strcpy(szBuffer, "disconnect");
     // Send Response back on our socket
-    int nlen = strlen(szBuffer);
+    int nlen = (int) strlen(szBuffer);
     szBuffer[nlen] = 0;
-    send(this->m_socket, szBuffer, strlen(szBuffer) + 1, 0);
+    send(this->m_socket, szBuffer, (int) strlen(szBuffer) + 1, 0);
     return true;
 }

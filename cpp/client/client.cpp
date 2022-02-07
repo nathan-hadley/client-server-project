@@ -10,26 +10,6 @@
 using namespace std;
 
 /*
- * ParseTokens splits a string, deliminating by semicolons and adds all strings
- * to the input vector
- *
- * Input:
- *      buffer: The string to be split
- *      a: The vector to have strings added to
-*/
-void ParseTokens(char* buffer, std::vector<std::string>& a) {
-    char* token;
-    char* rest = (char*)buffer;
-
-    while ((token = strtok_r(rest, ";", &rest))) {
-        printf("%s\n", token);
-        a.push_back(token);
-    }
-
-    return;
-}
-
-/*
  * ConnectToServer will connect to the Server based on command line
  *
  * Input:
@@ -39,11 +19,9 @@ void ParseTokens(char* buffer, std::vector<std::string>& a) {
  * Output:
  *      Returns true if a connection to the server is successful, false otherwise.
 */
-bool ConnectToServer(const char* serverAddress, int port, int& sock)
-{
-    struct sockaddr_in serv_addr;
-    if ((sock = socket(AF_INET, SOCK_STREAM, 0)) < 0)
-    {
+bool ConnectToServer(const char* serverAddress, int port, int& sock) {
+    struct sockaddr_in serv_addr{};
+    if ((sock = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
         printf("\n Socket creation error \n");
         return false;
     }
@@ -67,23 +45,23 @@ bool ConnectToServer(const char* serverAddress, int port, int& sock)
 
 int main(int argc, char const* argv[]) {
     int sock = 0;
-    struct sockaddr_in serv_addr;
     // Array of characters created as buffer, which will be passed to server?
     char buffer[1024] = { 0 };
+    bool validLogin = false;
 
     // Takes first command line argument: IP address of the server
     const char* serverAddress = argv[1];
     // Takes second command line argument: port the server is listening on
-    const int port = atoi(argv[2]);
+    const int port = stoi(argv[2]);
 
     bool bConnect = ConnectToServer(serverAddress, port, sock);
 
-    if (bConnect) {
+    while (bConnect && !validLogin) {
         string username,
-                password;
+        password;
 
         // NEED TO VALIDATE
-        cout << "Enter your username: ";
+        cout << "\nEnter your username: ";
         cin >> username;
         cout << "Enter your password: ";
         cin >> password;
@@ -92,21 +70,25 @@ int main(int argc, char const* argv[]) {
 
         // Copies the characters from connectRPC to the buffer array
         strcpy(buffer, connectRPC.c_str());
-        int nlen = strlen(buffer);
+        int nlen = (int) strlen(buffer);
         // Puts the null terminator at the end of the connectRPC characters
         buffer[nlen] = 0;
 
         // Sends the contents of the buffer through the created socket
-        int valwrite = send(sock, buffer, strlen(buffer) + 1, 0);
+        int valwrite = (int) send(sock, buffer, strlen(buffer) + 1, 0);
 
         printf("Connect message sent with %d bytes\n", valwrite);
 
         // Assigns the server response to the buffer
-        int valread = read(sock, buffer, 1024);
+        int valread = (int) read(sock, buffer, 1024);
         printf("Return response = %s with valread = %d\n", buffer, valread);
 
-    } else {
-        printf("Exit without calling RPC");
+        // Authenticate login
+        int response = stoi(buffer);
+        if (response == 1)
+            validLogin = true;
+        else
+            printf("Invalid username and/or password.\n");
     }
 
     // Do a disconnect Message
@@ -114,24 +96,24 @@ int main(int argc, char const* argv[]) {
         string exit;
         const char *disconnectRPC = "disconnect;";
 
-        cout << "\nType 'exit' to disconnect" << endl;
-        while (exit != "exit")
+        cout << "\nType 'EXIT' to disconnect" << endl;
+        while (exit != "EXIT")
             cin >> exit;
 
         // Copies the contents of the logoffRPC to the buffer
         strcpy(buffer, disconnectRPC);
-        int nlen = strlen(buffer);
+        int nlen = (int) strlen(buffer);
 
         // Put null terminator at the end of the logoffRPC characters in the buffer
         buffer[nlen] = 0;
 
         // Sends the contents of the buffer through the created socket
-        int valwrite = send(sock, buffer, strlen(buffer) + 1, 0);
+        int valwrite = (int) send(sock, buffer, strlen(buffer) + 1, 0);
 
         printf("Disconnect message sent with %d bytes\n", valwrite);
 
         // Assign the server response to the buffer
-        int valread = read(sock, buffer, 1024);
+        int valread = (int) read(sock, buffer, 1024);
         printf("Return response = %s with valread = %d\n", buffer, valread);
 
     } else {

@@ -33,14 +33,14 @@ public:
     static void ParseTokens(char* buffer, std::vector<std::string>& a);
 
 private:
-    int m_server_fd;
-    int m_socket;
+    int m_server_fd{};
+    int m_socket{};
     char* m_serverIP;
     int m_port;
-    struct sockaddr_in m_address;
+    struct sockaddr_in m_address{};
 
     // First one in this function should be a connect, and it will continue try
     // to process RPC's until a Disconnect happens.
-    bool ProcessConnectRPC(std::vector<std::string>& arrayTokens);
-    bool ProcessDisconnectRPC();
+    bool ProcessConnectRPC(std::vector<std::string>& arrayTokens) const;
+    bool ProcessDisconnectRPC() const;
 };
