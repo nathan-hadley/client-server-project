@@ -144,12 +144,8 @@ bool RPCServer::ProcessRPC() {
             bStatusOk = ProcessDisconnectRPC();
             printf("We are going to terminate this endless loop\n");
             bContinue = false; // We are going to leave this loop, as we are done
-        }
 
-        else if ((bConnected == true) && (aString == "status"))
-            bStatusOk = ProcessStatusRPC();   // Status RPC
-
-        else {
+        } else {
             // Not in our list, perhaps, print out what was sent
         }
     }
@@ -177,12 +173,6 @@ bool RPCServer::ProcessConnectRPC(std::vector<std::string>& arrayTokens) {
     szBuffer[nlen] = 0;
     send(this->m_socket, szBuffer, strlen(szBuffer) + 1, 0);
 
-    return true;
-}
-
-/* TDB
-*/
-bool RPCServer::ProcessStatusRPC() {
     return true;
 }
 
