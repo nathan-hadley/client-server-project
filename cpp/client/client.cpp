@@ -7,6 +7,7 @@
 #include <vector>
 #include <iterator>
 #include <iostream>
+#include <random>
 using namespace std;
 
 /*
@@ -59,7 +60,7 @@ int main(int argc, char const* argv[]) {
     while (bConnect && !validLogin) {
         string username,
         password;
-        
+
         cout << "\nEnter your username: ";
         cin >> username;
         cout << "Enter your password: ";
@@ -90,14 +91,27 @@ int main(int argc, char const* argv[]) {
             printf("Invalid username and/or password.\n");
     }
 
+    // Obtain a random number from hardware
+    random_device rd; 
+    // Seed the generator
+    mt19937 gen(rd());
+    // Define the range 
+    uniform_int_distribution<> distr(1, 10);
+
+    int seconds = distr(gen);
+    sleep(seconds);
+    cout << "Slept for " << seconds << " seconds." << endl;;    
+
     // Do a disconnect Message
     if (bConnect) {
+        
         string exit;
-        const char *disconnectRPC = "disconnect;";
-
-        cout << "\nType 'EXIT' to disconnect" << endl;
-        while (exit != "EXIT")
+        const char* disconnectRPC = "disconnect;";
+        
+        while (exit != "EXIT") {
+            cout << "Type 'EXIT' to disconnect" << endl;
             cin >> exit;
+        }            
 
         // Copies the contents of the logoffRPC to the buffer
         strcpy(buffer, disconnectRPC);
