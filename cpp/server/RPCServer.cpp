@@ -97,10 +97,9 @@ void RPCServer::ParseTokens(char* buffer, std::vector<std::string>& a) {
 * ProcessRPC will examine buffer and will essentially control
 */
 bool RPCServer::ProcessRPC() {
-    const char* rpcs[] = { "connect", "disconnect" };
     char buffer[1024] = { 0 };
     vector<string> arrayTokens;
-    int valread = 0;
+    int valread;
     bool bConnected = false;
     bool bStatusOk = true;
     const int RPCTOKEN = 0;
