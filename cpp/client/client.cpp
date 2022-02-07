@@ -10,7 +10,7 @@
 using namespace std;
 
 /*
- * ParseTokens splits a string deliminates by semicolons and adds all strings
+ * ParseTokens splits a string, deliminating by semicolons and adds all strings
  * to the input vector
  *
  * Input:
@@ -52,14 +52,12 @@ bool ConnectToServer(const char* serverAddress, int port, int& sock)
     serv_addr.sin_port = htons(port);
 
     // Convert IPv4 and IPv6 addresses from text to binary form
-    if (inet_pton(AF_INET, serverAddress, &serv_addr.sin_addr) <= 0)
-    {
+    if (inet_pton(AF_INET, serverAddress, &serv_addr.sin_addr) <= 0) {
         printf("\nInvalid address/ Address not supported \n");
         return false;
     }
 
-    if (connect(sock, (struct sockaddr*)&serv_addr, sizeof(serv_addr)) < 0)
-    {
+    if (connect(sock, (struct sockaddr*)&serv_addr, sizeof(serv_addr)) < 0) {
         printf("\nConnection Failed \n");
         return false;
     }
