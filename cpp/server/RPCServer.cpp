@@ -134,7 +134,7 @@ bool RPCServer::ProcessRPC() {
 
         else if (bConnected && (aString == "disconnect")) {
             ProcessDisconnectRPC();
-            printf("Shutting down server.\n");
+            printf("Disconnected from client.\n");
             bContinue = false; // We are going to leave this loop
 
         } else {
