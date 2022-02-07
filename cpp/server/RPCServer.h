@@ -30,10 +30,9 @@ public:
     bool StartServer();
     bool ListenForClient();
     bool ProcessRPC();
-    void ParseTokens(char* buffer, std::vector<std::string>& a);
+    static void ParseTokens(char* buffer, std::vector<std::string>& a);
 
 private:
-    int m_rpcCount;
     int m_server_fd;
     int m_socket;
     char* m_serverIP;

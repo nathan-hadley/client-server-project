@@ -16,16 +16,15 @@ using namespace std;
  *      port: The port the server will be listening on
 */
 RPCServer::RPCServer(const char* serverIP, int port) {
-    m_rpcCount = 0;
     m_serverIP = (char*)serverIP;
     m_port = port;
 };
 
-RPCServer::~RPCServer() = default;;
+RPCServer::~RPCServer() = default;
 
 /*
- * StartServer will create a server on a Port that was passed in,
- * and create a socket
+ * StartServer will create a server on a port that was passed in, and create a
+ * socket
 */
 bool RPCServer::StartServer() {
     int opt = 1;
@@ -92,17 +91,15 @@ void RPCServer::ParseTokens(char* buffer, std::vector<std::string>& a) {
         printf("%s\n", token);
         a.push_back(token);
     }
-
-    return;
 }
 
 /*
 * ProcessRPC will examine buffer and will essentially control
 */
 bool RPCServer::ProcessRPC() {
-    const char* rpcs[] = { "connect", "disconnect", "status" };
+    const char* rpcs[] = { "connect", "disconnect" };
     char buffer[1024] = { 0 };
-    std::vector<std::string> arrayTokens;
+    vector<string> arrayTokens;
     int valread = 0;
     bool bConnected = false;
     bool bStatusOk = true;
@@ -120,8 +117,8 @@ bool RPCServer::ProcessRPC() {
         arrayTokens.clear();
         this->ParseTokens(buffer, arrayTokens);
 
-        // Enumerate through the tokens. The first token is always the
-        // specific RPC
+        // Enumerate through the tokens. The first token is always the specific
+        // RPC
         for (auto x : arrayTokens) {
             printf("Debugging our tokens\n");
             char* token = (char*)malloc(x.size() + 1);
@@ -130,23 +127,23 @@ bool RPCServer::ProcessRPC() {
             free(token);
         }
 
-        // string statements are not supported with a switch, so using if/else
-        // logic to dispatch
+        // String statements are not supported with a switch, so using if/else
+        // logic to dispatch.
         string aString = arrayTokens[RPCTOKEN];
 
-        if ((bConnected == false) && (aString == "connect")) {
+        if (!bConnected && (aString == "connect")) {
             bStatusOk = ProcessConnectRPC(arrayTokens);  // Connect RPC
-            if (bStatusOk == true)
+            if (bStatusOk)
                 bConnected = true;
         }
 
-        else if ((bConnected == true) && (aString == "disconnect")) {
+        else if (bConnected && (aString == "disconnect")) {
             bStatusOk = ProcessDisconnectRPC();
-            printf("We are going to terminate this endless loop\n");
+            printf("Shutting down server.\n");
             bContinue = false; // We are going to leave this loop, as we are done
 
         } else {
-            // Not in our list, perhaps, print out what was sent
+            printf("Error: not an RPC.\n");
         }
     }
     return true;
@@ -165,7 +162,7 @@ bool RPCServer::ProcessConnectRPC(std::vector<std::string>& arrayTokens) {
     if ((usernameString == "USERNAME") && (passwordString == "PASSWORD1234")) {
         strcpy(szBuffer, "1;"); // Connected
     } else {
-        strcpy(szBuffer, "0;"); // Not Connected
+        strcpy(szBuffer, "0;"); // Not connected
     }
 
     // Send Response back on our socket
@@ -177,6 +174,7 @@ bool RPCServer::ProcessConnectRPC(std::vector<std::string>& arrayTokens) {
 }
 
 /*
+ * Processes disconnectRPC.
 */
 bool RPCServer::ProcessDisconnectRPC() {
     char szBuffer[16];
