@@ -59,8 +59,7 @@ int main(int argc, char const* argv[]) {
     while (bConnect && !validLogin) {
         string username,
         password;
-
-        // NEED TO VALIDATE
+        
         cout << "\nEnter your username: ";
         cin >> username;
         cout << "Enter your password: ";
