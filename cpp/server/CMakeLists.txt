@@ -3,4 +3,4 @@ project(server)
 
 set(CMAKE_CXX_STANDARD 11)
 
-add_executable(server main.cpp RPCServer.cpp)
+add_executable(server main.cpp RPCServer.cpp RPCServer.h)

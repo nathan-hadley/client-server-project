@@ -6,8 +6,8 @@
 
 #IncludeRegexTransform: 
 
-/tmp/tmp.dI8eTe8PyH/client.cpp
-stdio.h
+/Users/FelixMinhVu/Documents/GitHub/client-server-project/cpp/client/client.cpp
+cstdio
 -
 sys/socket.h
 -
@@ -15,10 +15,14 @@ arpa/inet.h
 -
 unistd.h
 -
-string.h
+cstring
 -
 vector
 -
 iterator
+-
+iostream
+-
+random
 -
 

@@ -100,7 +100,7 @@ int main(int argc, char const* argv[]) {
 
     int seconds = distr(gen);
     sleep(seconds);
-    cout << "Slept for " << seconds << " seconds." << endl;;    
+    cout << "\nSlept for " << seconds << " seconds." << endl;;
 
     // Do a disconnect Message
     if (bConnect) {

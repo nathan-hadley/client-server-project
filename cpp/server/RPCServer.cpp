@@ -37,7 +37,7 @@ bool RPCServer::StartServer() {
     }
 
     // Forcefully attaching socket to the port
-    if (setsockopt(m_server_fd, SOL_SOCKET, SO_REUSEADDR | SO_REUSEPORT,
+    if (setsockopt(m_server_fd, SOL_SOCKET, SO_REUSEADDR,
         &opt, sizeof(opt))) {
         perror("setsockopt");
         exit(EXIT_FAILURE);
@@ -134,12 +134,13 @@ bool RPCServer::ProcessRPC() {
 
         else if (bConnected && (aString == "disconnect")) {
             ProcessDisconnectRPC();
-            printf("Disconnected from client.\n");
+            printf("Disconnected from client.\n\n");
             bContinue = false; // We are going to leave this loop
 
         } else {
             printf("Error: not an RPC.\n");
         }
+        printf("Waiting.\n");
     }
     return true;
 }
@@ -158,9 +159,11 @@ bool RPCServer::ProcessConnectRPC(std::vector<std::string>& arrayTokens) const {
     if ((usernameString == "USERNAME") && (passwordString == "PASSWORD1234")) {
         strcpy(szBuffer, "1;"); // Connected
         validLogin = true;
+        printf("Successful login.\n\n");
     } else {
         strcpy(szBuffer, "0;"); // Not connected
         validLogin = false;
+        printf("Failed login.\n\n");
     }
 
     // Send Response back on our socket

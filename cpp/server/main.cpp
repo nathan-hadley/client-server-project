@@ -11,7 +11,7 @@ int main(int argc, char const* argv[]) {
     auto* serverObj = new RPCServer(serverIP, port);
 
     statusOk = serverObj->StartServer();
-    printf("\nServer is running.\n");
+    printf("\nServer is running.\nWaiting.\n");
     while (statusOk) {
         statusOk = serverObj->ListenForClient();
         statusOk = serverObj->ProcessRPC(); // Launch thread

@@ -6,27 +6,7 @@
 
 #IncludeRegexTransform: 
 
-/tmp/tmp.G8GNuHZFd6/RPCServer.cpp
-unistd.h
--
-stdio.h
--
-sys/socket.h
--
-stdlib.h
--
-netinet/in.h
--
-string.h
--
-vector
--
-iterator
--
-RPCServer.h
-/tmp/tmp.G8GNuHZFd6/RPCServer.h
-
-/tmp/tmp.G8GNuHZFd6/RPCServer.h
+/Users/FelixMinhVu/Documents/GitHub/client-server-project/cpp/server/RPCServer.h
 unistd.h
 -
 stdio.h
@@ -44,9 +24,9 @@ vector
 iterator
 -
 
-/tmp/tmp.G8GNuHZFd6/main.cpp
+/Users/FelixMinhVu/Documents/GitHub/client-server-project/cpp/server/main.cpp
 cstdio
 -
 RPCServer.h
-/tmp/tmp.G8GNuHZFd6/RPCServer.h
+/Users/FelixMinhVu/Documents/GitHub/client-server-project/cpp/server/RPCServer.h
 
