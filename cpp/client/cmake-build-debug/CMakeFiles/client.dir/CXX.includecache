@@ -6,7 +6,7 @@
 
 #IncludeRegexTransform: 
 
-/Users/FelixMinhVu/Documents/GitHub/client-server-project/cpp/client/client.cpp
+/tmp/tmp.dI8eTe8PyH/client.cpp
 cstdio
 -
 sys/socket.h
@@ -22,7 +22,5 @@ vector
 iterator
 -
 iostream
--
-random
 -
 

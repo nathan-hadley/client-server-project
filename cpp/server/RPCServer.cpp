@@ -1,7 +1,7 @@
 #include <unistd.h>
-#include <stdio.h>
+#include <cstdio>
 #include <sys/socket.h>
-#include <stdlib.h>
+#include <cstdlib>
 #include <netinet/in.h>
 #include <cstring>
 #include <vector>
@@ -155,7 +155,7 @@ bool RPCServer::ProcessConnectRPC(std::vector<std::string>& arrayTokens) const {
     string passwordString = arrayTokens[PASSWORD_TOKEN];
     char szBuffer[80];
 
-    // Our authentication Logic.
+    // Our authentication logic.
     if ((usernameString == "USERNAME") && (passwordString == "PASSWORD1234")) {
         strcpy(szBuffer, "1;"); // Connected
         validLogin = true;
@@ -171,10 +171,8 @@ bool RPCServer::ProcessConnectRPC(std::vector<std::string>& arrayTokens) const {
     szBuffer[nlen] = 0;
     send(this->m_socket, szBuffer, (int) strlen(szBuffer) + 1, 0);
 
-    if (validLogin)
-        return true;
-    else
-        return false;
+    if (validLogin) return true;
+    else return false;
 }
 
 /*

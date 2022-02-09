@@ -5,7 +5,7 @@ using namespace std;
 int main(int argc, char const* argv[]) {
 
     const char* serverIP = argv[1];
-    int port = stoi(argv[2]);
+    int port = atoi(argv[2]);
 
     bool statusOk = true;
     auto* serverObj = new RPCServer(serverIP, port);

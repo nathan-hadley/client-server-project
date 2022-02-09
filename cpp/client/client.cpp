@@ -53,20 +53,22 @@ int main(int argc, char const* argv[]) {
     // Takes first command line argument: IP address of the server
     const char* serverAddress = argv[1];
     // Takes second command line argument: port the server is listening on
-    const int port = stoi(argv[2]);
+    const int port = atoi(argv[2]);
 
     bool bConnect = ConnectToServer(serverAddress, port, sock);
 
     while (bConnect && !validLogin) {
         string username,
-        password;
+        password,
+        connectRPC;
 
         cout << "\nEnter your username: ";
         cin >> username;
         cout << "Enter your password: ";
         cin >> password;
 
-        string connectRPC = "connect;" + username + ";" + password + ";";
+        connectRPC.append("connect;").append(username).append(";");
+        connectRPC.append(password).append(";");
 
         // Copies the characters from connectRPC to the buffer array
         strcpy(buffer, connectRPC.c_str());
@@ -84,7 +86,7 @@ int main(int argc, char const* argv[]) {
         printf("Return response = %s with valread = %d\n", buffer, valread);
 
         // Authenticate login
-        int response = stoi(buffer);
+        int response = atoi(buffer);
         if (response == 1)
             validLogin = true;
         else
@@ -100,7 +102,7 @@ int main(int argc, char const* argv[]) {
 
     int seconds = distr(gen);
     sleep(seconds);
-    cout << "\nSlept for " << seconds << " seconds." << endl;;
+    cout << "\nSlept for " << seconds << " seconds." << endl;
 
     // Do a disconnect Message
     if (bConnect) {
