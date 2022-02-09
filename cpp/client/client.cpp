@@ -89,9 +89,10 @@ int main(int argc, char const* argv[]) {
 
         // Authenticate login
         int response = atoi(buffer);
-        if (response == 1)
+        if (response == 1) {
             validLogin = true;
-        else
+            printf("Login successful.\n");
+        } else
             printf("Invalid username and/or password.\n");
     }
 
