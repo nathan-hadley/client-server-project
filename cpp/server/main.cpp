@@ -2,6 +2,7 @@
 #include "RPCServer.h"
 using namespace std;
 
+// Main function for the server.
 int main(int argc, char const* argv[]) {
 
     const char* serverIP = argv[1];

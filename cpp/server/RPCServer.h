@@ -14,13 +14,14 @@
 
 #pragma once
 #include <unistd.h>
-#include <stdio.h>
+#include <cstdio>
 #include <sys/socket.h>
-#include <stdlib.h>
+#include <cstdlib>
 #include <netinet/in.h>
-#include <string.h>
+#include <cstring>
 #include <vector>
 #include <iterator>
+using namespace std;
 
 
 class RPCServer {
@@ -30,7 +31,7 @@ public:
     bool StartServer();
     bool ListenForClient();
     bool ProcessRPC();
-    static void ParseTokens(char* buffer, std::vector<std::string>& a);
+    static void ParseTokens(char* buffer, vector<string>& a);
 
 private:
     int m_server_fd{};
@@ -41,6 +42,6 @@ private:
 
     // First one in this function should be a connect, and it will continue try
     // to process RPC's until a Disconnect happens.
-    bool ProcessConnectRPC(std::vector<std::string>& arrayTokens) const;
+    bool ProcessConnectRPC(vector<string>& arrayTokens) const;
     bool ProcessDisconnectRPC() const;
 };

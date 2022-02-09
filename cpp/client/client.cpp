@@ -62,11 +62,13 @@ int main(int argc, char const* argv[]) {
         password,
         connectRPC;
 
+        // Collect username and password
         cout << "\nEnter your username: ";
         cin >> username;
         cout << "Enter your password: ";
         cin >> password;
 
+        // Create string to send to server. Ex.: connect;USERNAME;PASSWORD1234;"
         connectRPC.append("connect;").append(username).append(";");
         connectRPC.append(password).append(";");
 

@@ -14,18 +14,21 @@ using namespace std;
  * Input:
  *      serverIP: The IP of the server
  *      port: The port the server will be listening on
-*/
+ */
 RPCServer::RPCServer(const char* serverIP, int port) {
     m_serverIP = (char*)serverIP;
     m_port = port;
 }
 
+/*
+ * Destructor
+ */
 RPCServer::~RPCServer() = default;
 
 /*
  * StartServer will create a server on a port that was passed in, and create a
  * socket
-*/
+ */
 bool RPCServer::StartServer() {
     int opt = 1;
     const int BACKLOG = 10;
@@ -62,8 +65,8 @@ bool RPCServer::StartServer() {
 }
 
 /*
-* Will accept a new connection by listening on its address
-*/
+ * Will accept a new connection by listening on its address
+ */
 bool RPCServer::ListenForClient() {
 
     int addrlen = sizeof(m_address);
@@ -85,7 +88,7 @@ bool RPCServer::ListenForClient() {
  * Input:
  *      buffer: The string to be split
  *      a: The vector to have strings added to
-*/
+ */
 void RPCServer::ParseTokens(char* buffer, vector<string>& a) {
     char* token;
     char* rest = (char*)buffer;
@@ -96,8 +99,9 @@ void RPCServer::ParseTokens(char* buffer, vector<string>& a) {
 }
 
 /*
-* ProcessRPC will examine buffer and will essentially control
-*/
+ * ProcessRPC will examine buffer and will essentially control the server
+ * processes.
+ */
 bool RPCServer::ProcessRPC() {
     char buffer[1024] = { 0 };
     vector<string> arrayTokens;
@@ -133,6 +137,7 @@ bool RPCServer::ProcessRPC() {
         }
 
         else if (bConnected && (aString == "disconnect")) {
+            bool statusOk = true;
             ProcessDisconnectRPC();
             printf("Disconnected from client.\n\n");
             bContinue = false; // We are going to leave this loop
@@ -145,7 +150,14 @@ bool RPCServer::ProcessRPC() {
     return true;
 }
 
-bool RPCServer::ProcessConnectRPC(std::vector<std::string>& arrayTokens) const {
+/*
+ * Processes the "connect" RPC. Returns true if login is valid.
+ *
+ * Input:
+ *      - arrayTokens: tokens received from client (Ex.: "connect," "USERNAME,"
+ *      and "PASSWORD1234."
+ */
+bool RPCServer::ProcessConnectRPC(vector<string>& arrayTokens) const {
     const int USERNAME_TOKEN = 1;
     const int PASSWORD_TOKEN = 2;
     bool validLogin;
@@ -180,7 +192,8 @@ bool RPCServer::ProcessConnectRPC(std::vector<std::string>& arrayTokens) const {
 */
 bool RPCServer::ProcessDisconnectRPC() const {
     char szBuffer[16];
-    strcpy(szBuffer, "disconnect");
+    strcpy(szBuffer, "1;");
+
     // Send Response back on our socket
     int nlen = (int) strlen(szBuffer);
     szBuffer[nlen] = 0;
