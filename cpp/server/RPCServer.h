@@ -1,12 +1,10 @@
-/* RPCServer.cpp : This file contains the 'main' function. Program execution
- * begins and ends there. This is a very simple example of a CPSC5042 Server
- * that will listen to a CPSC5042 Client server, then run the various RPC's that
- * might happen between the server and client.
+/* This is a very simple example of a server that will listen to a client
+ * server, then run the various RPCs that between the server and client.
  *
  * Version 1 will have the server handle one client at a time. The server will:
  *      - Wait for connection from client
  *      - Process the Connect API once connected
- *      - Process all RPC requests until the client does a Disconnect RPC
+ *      - Process all RPC requests until the client sends a disconnect RPC
  *      - This initial server will handle 2 RPC's:
  *          - Connect
  *          - Disconnect
