@@ -10,7 +10,7 @@
 using namespace std;
 
 /*
- * Constructor for RPCSergver
+ * Constructor for RPCServer
  * Input:
  *      serverIP: The IP of the server
  *      port: The port the server will be listening on
@@ -113,7 +113,6 @@ bool RPCServer::ProcessRPC() {
     while (bContinue) {
         // Should be blocked when a new RPC has not called us yet
         if ((valread = (int) read(this->m_socket, buffer, sizeof(buffer))) <= 0) {
-            printf("errno is %d\n", errno);
             break;
         }
 
