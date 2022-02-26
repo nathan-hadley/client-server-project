@@ -80,6 +80,12 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="/tmp/tmp.G8GNuHZFd6/RPCImpl.cpp">
+			<Option target="server"/>
+		</Unit>
+		<Unit filename="/tmp/tmp.G8GNuHZFd6/RPCImpl.h">
+			<Option target="server"/>
+		</Unit>
 		<Unit filename="/tmp/tmp.G8GNuHZFd6/RPCServer.cpp">
 			<Option target="server"/>
 		</Unit>

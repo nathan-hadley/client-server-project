@@ -27,7 +27,6 @@ int main(int argc, char const* argv[]) {
     printf("\nServer is running.\nWaiting.\n");
     while (statusOk) {
         statusOk = serverObj->ListenForClient();
-        statusOk = serverObj->ProcessRPC(); // Launch thread
     }
 
     delete serverObj;

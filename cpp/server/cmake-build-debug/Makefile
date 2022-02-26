@@ -129,6 +129,30 @@ server/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/build
 .PHONY : server/fast
 
+RPCImpl.o: RPCImpl.cpp.o
+.PHONY : RPCImpl.o
+
+# target to build an object file
+RPCImpl.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/RPCImpl.cpp.o
+.PHONY : RPCImpl.cpp.o
+
+RPCImpl.i: RPCImpl.cpp.i
+.PHONY : RPCImpl.i
+
+# target to preprocess a source file
+RPCImpl.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/RPCImpl.cpp.i
+.PHONY : RPCImpl.cpp.i
+
+RPCImpl.s: RPCImpl.cpp.s
+.PHONY : RPCImpl.s
+
+# target to generate assembly for a file
+RPCImpl.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/RPCImpl.cpp.s
+.PHONY : RPCImpl.cpp.s
+
 RPCServer.o: RPCServer.cpp.o
 .PHONY : RPCServer.o
 
@@ -186,6 +210,9 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... server"
+	@echo "... RPCImpl.o"
+	@echo "... RPCImpl.i"
+	@echo "... RPCImpl.s"
 	@echo "... RPCServer.o"
 	@echo "... RPCServer.i"
 	@echo "... RPCServer.s"

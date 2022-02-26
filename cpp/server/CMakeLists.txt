@@ -3,4 +3,6 @@ project(server)
 
 set(CMAKE_CXX_STANDARD 11)
 
-add_executable(server main.cpp RPCServer.cpp RPCServer.h)
+add_executable(server main.cpp RPCServer.cpp RPCImpl.cpp)
+
+set(CMAKE_CXX_FLAGS -pthread)

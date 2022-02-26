@@ -1,4 +1,5 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/server.dir/RPCImpl.cpp.o"
   "CMakeFiles/server.dir/RPCServer.cpp.o"
   "CMakeFiles/server.dir/main.cpp.o"
   "server"
