@@ -23,8 +23,8 @@ int main(int argc, char const* argv[]) {
     auto* serverObj = new RPCServer(serverIP, port);
 
     serverObj->StartServer();
-    serverObj->ListenForClient();
     printf("\nServer is running.\nWaiting.\n");
+    serverObj->ListenForClient();
 
     delete serverObj;
     return 0;

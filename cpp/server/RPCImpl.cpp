@@ -7,18 +7,10 @@
 #include <iterator>
 
 #include "RPCImpl.h"
-#include "LocalContext.h"
 using namespace std;
-
-typedef struct GlobalContext {
-    int g_rpcCount;
-} GlobalContext;
-
-GlobalContext globalObj; // We need to protect this, as we don't want bad data
 
 RPCImpl::RPCImpl(int socket) {
     m_socket = socket;
-    m_rpcCount = 0;
 }
 
 RPCImpl::~RPCImpl() = default;
@@ -124,6 +116,16 @@ bool RPCImpl::ProcessConnectRPC(vector<string>& arrayTokens) const {
 
     if (validLogin) return true;
     else return false;
+}
+
+void RPCImpl::playConnect4RPC(vector<string>& arrayTokens) const {
+    // TODO implement
+}
+void RPCImpl::playPieceRPC(vector<string>& arrayTokens) const {
+    // TODO implement
+}
+void RPCImpl::checkStatsRPC() const {
+    // TODO implement
 }
 
 /*

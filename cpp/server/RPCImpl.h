@@ -9,10 +9,13 @@ public:
     ~RPCImpl();
     void ProcessRPC();
 private:
-    int m_rpcCount;
     int m_socket;
 
     bool ProcessConnectRPC(vector<string>& arrayTokens) const;
+    void playConnect4RPC(vector<string>& arrayTokens) const;
+    void playPieceRPC(vector<string>& arrayTokens) const;
+    void checkStatsRPC() const;
     void ProcessDisconnectRPC() const;
+
     static void ParseTokens(char* buffer, vector<string>& a);
 };
