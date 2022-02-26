@@ -23,8 +23,6 @@ cstdlib
 -
 netinet/in.h
 -
-cstring
--
 vector
 -
 iterator

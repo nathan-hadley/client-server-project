@@ -15,12 +15,11 @@
 #include <sys/socket.h>
 #include <cstdlib>
 #include <netinet/in.h>
-#include <cstring>
 #include <vector>
 #include <iterator>
 
 #include "RPCServer.h"
-#include "RPCImpl.h"
+#include "RPCImpl.cpp"
 
 using namespace std;
 
@@ -30,10 +29,9 @@ void* initThread(void* vargp) {
     sleep(1);
 
     int socket = *(int *) vargp;
-    printf("Printing GeeksQuiz from Thread \n");
     auto *rpcImplObj = new RPCImpl(socket);
     rpcImplObj->ProcessRPC();   // This will go until client disconnects;
-    printf("Done with Thread");
+    printf("Done with thread");
 
     return nullptr;
 }
@@ -58,7 +56,7 @@ RPCServer::~RPCServer() = default;
  * StartServer will create a server on a port that was passed in, and create a
  * socket
  */
-bool RPCServer::StartServer() {
+void RPCServer::StartServer() {
     int opt = 1;
     const int BACKLOG = 10;
 
@@ -90,13 +88,12 @@ bool RPCServer::StartServer() {
         perror("listen");
         exit(EXIT_FAILURE);
     }
-    return true;
 }
 
 /*
  * Will accept a new connection by listening on its address
  */
-bool RPCServer::ListenForClient() {
+void RPCServer::ListenForClient() {
     int addrlen = sizeof(m_address);
 
     for (;;) {
@@ -106,10 +103,9 @@ bool RPCServer::ListenForClient() {
             exit(EXIT_FAILURE);
         }
         pthread_t thread_id;
-        printf("Launching Thread\n");
+        printf("Launching thread.\n");
         int socket = m_socket;
         pthread_create(&thread_id, nullptr, initThread, (void*)&socket);
         // TODO Probably should save thread_id into some type of array
     }
-    return true;
 }

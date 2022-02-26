@@ -20,14 +20,11 @@ int main(int argc, char const* argv[]) {
     const char* serverIP = argv[1];
     int port = atoi(argv[2]);
 
-    bool statusOk = true;
     auto* serverObj = new RPCServer(serverIP, port);
 
-    statusOk = serverObj->StartServer();
+    serverObj->StartServer();
+    serverObj->ListenForClient();
     printf("\nServer is running.\nWaiting.\n");
-    while (statusOk) {
-        statusOk = serverObj->ListenForClient();
-    }
 
     delete serverObj;
     return 0;

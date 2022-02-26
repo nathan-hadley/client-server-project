@@ -26,8 +26,8 @@ class RPCServer {
 public:
     RPCServer(const char *serverIP, int port);
     ~RPCServer();
-    bool StartServer();
-    bool ListenForClient();
+    void StartServer();
+    void ListenForClient();
 
 private:
     int m_server_fd{};

@@ -44,7 +44,7 @@ void RPCImpl::ParseTokens(char* buffer, vector<string>& a) {
  * ProcessRPC will examine buffer and will essentially control the server
  * processes.
  */
-bool RPCImpl::ProcessRPC() {
+void RPCImpl::ProcessRPC() {
     char buffer[1024] = { 0 };
     vector<string> arrayTokens;
     int valread;
@@ -78,7 +78,6 @@ bool RPCImpl::ProcessRPC() {
         }
 
         else if (bConnected && (aString == "disconnect")) {
-            bool statusOk = true;
             ProcessDisconnectRPC();
             printf("Disconnected from client.\n\n");
             bContinue = false; // We are going to leave this loop
@@ -88,7 +87,6 @@ bool RPCImpl::ProcessRPC() {
         }
         printf("Waiting.\n");
     }
-    return true;
 }
 
 /*
@@ -131,7 +129,7 @@ bool RPCImpl::ProcessConnectRPC(vector<string>& arrayTokens) const {
 /*
  * Processes disconnectRPC.
 */
-bool RPCImpl::ProcessDisconnectRPC() const {
+void RPCImpl::ProcessDisconnectRPC() const {
     char szBuffer[16];
     strcpy(szBuffer, "1;");
 
@@ -139,5 +137,4 @@ bool RPCImpl::ProcessDisconnectRPC() const {
     int nlen = (int) strlen(szBuffer);
     szBuffer[nlen] = 0;
     send(this->m_socket, szBuffer, (int) strlen(szBuffer) + 1, 0);
-    return true;
 }
