@@ -6,21 +6,3 @@
 
 #IncludeRegexTransform: 
 
-/tmp/tmp.dI8eTe8PyH/client.cpp
-cstdio
--
-sys/socket.h
--
-arpa/inet.h
--
-unistd.h
--
-cstring
--
-vector
--
-iterator
--
-iostream
--
-

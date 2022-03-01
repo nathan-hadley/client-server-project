@@ -2,27 +2,24 @@
 <project version="4">
   <component name="PublishConfigData" serverName="SU" remoteFilesAllowedToDisappearOnAutoupload="false">
     <serverData>
-      <paths name="SU (7bcd1841-3f41-4cde-a313-97f6d0441397)">
+      <paths name="CS1 (21ef96b4-5f49-4d4f-82e7-f8d43d17bb5f)">
         <serverdata>
           <mappings>
-            <mapping deploy="/" local="$PROJECT_DIR$" />
+            <mapping deploy="/home/st/pharvey/cpsc5042/Client" local="$PROJECT_DIR$" />
           </mappings>
           <excludedPaths>
-            <excludedPath local="true" path="$PROJECT_DIR$/cmake-build-debug-remote-host" />
-            <excludedPath local="true" path="$PROJECT_DIR$/cmake-build-debug-remote" />
             <excludedPath local="true" path="$PROJECT_DIR$/cmake-build-debug" />
-            <excludedPath local="true" path="$PROJECT_DIR$/cmake-build-debug-su" />
+            <excludedPath local="true" path="$PROJECT_DIR$/cmake-build-debug-cs1" />
+            <excludedPath local="true" path="$PROJECT_DIR$/cmake-build-debug" />
+            <excludedPath local="true" path="$PROJECT_DIR$/cmake-build-debug-cs1" />
           </excludedPaths>
         </serverdata>
       </paths>
-      <paths name="SU (ef824880-7f83-4af0-ad6d-8c56d1157ae8)">
+      <paths name="SU">
         <serverdata>
           <mappings>
-            <mapping deploy="/tmp/tmp.dI8eTe8PyH" local="$PROJECT_DIR$" />
+            <mapping local="$PROJECT_DIR$" web="/" />
           </mappings>
-          <excludedPaths>
-            <excludedPath local="true" path="$PROJECT_DIR$/cmake-build-debug" />
-          </excludedPaths>
         </serverdata>
       </paths>
     </serverData>
