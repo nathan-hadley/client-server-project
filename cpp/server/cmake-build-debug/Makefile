@@ -144,6 +144,7 @@ server/fast:
 .PHONY : server/fast
 
 RPCImpl.o: RPCImpl.cpp.o
+
 .PHONY : RPCImpl.o
 
 # target to build an object file
@@ -152,6 +153,7 @@ RPCImpl.cpp.o:
 .PHONY : RPCImpl.cpp.o
 
 RPCImpl.i: RPCImpl.cpp.i
+
 .PHONY : RPCImpl.i
 
 # target to preprocess a source file
@@ -160,6 +162,7 @@ RPCImpl.cpp.i:
 .PHONY : RPCImpl.cpp.i
 
 RPCImpl.s: RPCImpl.cpp.s
+
 .PHONY : RPCImpl.s
 
 # target to generate assembly for a file
