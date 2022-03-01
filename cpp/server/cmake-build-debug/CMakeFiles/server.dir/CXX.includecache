@@ -6,37 +6,9 @@
 
 #IncludeRegexTransform: 
 
-/cygdrive/c/Users/peter/Documents/Seattle University/Computing Systems II/Group Project/Milestone 2/client-server-project/cpp/server/Connect4.cpp
-Connect4.h
-/cygdrive/c/Users/peter/Documents/Seattle University/Computing Systems II/Group Project/Milestone 2/client-server-project/cpp/server/Connect4.h
+/tmp/tmp.G8GNuHZFd6/RPCImpl.cpp
 
-/cygdrive/c/Users/peter/Documents/Seattle University/Computing Systems II/Group Project/Milestone 2/client-server-project/cpp/server/Connect4.h
-
-/cygdrive/c/Users/peter/Documents/Seattle University/Computing Systems II/Group Project/Milestone 2/client-server-project/cpp/server/RPCImpl.cpp
-unistd.h
--
-cstdio
--
-sys/socket.h
--
-cstdlib
--
-cstring
--
-vector
--
-iterator
--
-RPCImpl.h
-/cygdrive/c/Users/peter/Documents/Seattle University/Computing Systems II/Group Project/Milestone 2/client-server-project/cpp/server/RPCImpl.h
-
-/cygdrive/c/Users/peter/Documents/Seattle University/Computing Systems II/Group Project/Milestone 2/client-server-project/cpp/server/RPCImpl.h
-string
--
-vector
--
-
-/cygdrive/c/Users/peter/Documents/Seattle University/Computing Systems II/Group Project/Milestone 2/client-server-project/cpp/server/RPCServer.cpp
+/tmp/tmp.G8GNuHZFd6/RPCServer.cpp
 unistd.h
 -
 cstdio
@@ -52,11 +24,11 @@ vector
 iterator
 -
 RPCServer.h
-/cygdrive/c/Users/peter/Documents/Seattle University/Computing Systems II/Group Project/Milestone 2/client-server-project/cpp/server/RPCServer.h
+/tmp/tmp.G8GNuHZFd6/RPCServer.h
 RPCImpl.cpp
-/cygdrive/c/Users/peter/Documents/Seattle University/Computing Systems II/Group Project/Milestone 2/client-server-project/cpp/server/RPCImpl.cpp
+/tmp/tmp.G8GNuHZFd6/RPCImpl.cpp
 
-/cygdrive/c/Users/peter/Documents/Seattle University/Computing Systems II/Group Project/Milestone 2/client-server-project/cpp/server/RPCServer.h
+/tmp/tmp.G8GNuHZFd6/RPCServer.h
 unistd.h
 -
 cstdio
@@ -73,10 +45,4 @@ vector
 -
 iterator
 -
-
-/cygdrive/c/Users/peter/Documents/Seattle University/Computing Systems II/Group Project/Milestone 2/client-server-project/cpp/server/main.cpp
-cstdio
--
-RPCServer.h
-/cygdrive/c/Users/peter/Documents/Seattle University/Computing Systems II/Group Project/Milestone 2/client-server-project/cpp/server/RPCServer.h
 

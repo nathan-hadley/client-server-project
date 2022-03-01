@@ -119,13 +119,13 @@ bool RPCImpl::ProcessConnectRPC(vector<string>& arrayTokens) const {
 }
 
 void RPCImpl::playConnect4RPC(vector<string>& arrayTokens) const {
-    // TODO implement
+    // TODO
 }
 void RPCImpl::playPieceRPC(vector<string>& arrayTokens) const {
-    // TODO implement
+    // TODO
 }
 void RPCImpl::checkStatsRPC() const {
-    // TODO implement
+    // TODO
 }
 
 /*

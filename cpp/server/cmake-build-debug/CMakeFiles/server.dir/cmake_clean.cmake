@@ -1,9 +1,9 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/server.dir/Connect4.cpp.o"
   "CMakeFiles/server.dir/RPCImpl.cpp.o"
   "CMakeFiles/server.dir/RPCServer.cpp.o"
   "CMakeFiles/server.dir/main.cpp.o"
-  "libserver.dll.a"
-  "server.exe"
+  "server"
   "server.pdb"
 )
 

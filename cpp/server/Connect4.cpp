@@ -1,23 +1,21 @@
-//
-// Created by Nathan Hadley on 2/26/22.
-//
-
+#include <string>
+#include <iostream>
 #include "Connect4.h"
+using namespace std;
 
-struct Connect4::playerInfo
-{
-string playerName;
-char playerID;
+struct Connect4::playerInfo {
+    string playerName;
+    char playerID;
 };
 
 
-// TODO game logic
+// TODO make game logic work
 
-
-int Connect4::PlayerDrop(char (*board)[10], int activePlayer) {
+// Moved the commented out code below to client side.
+/*
+int Connect4::PlayerDrop(char board[][10], int activePlayer) {
     int dropChoice;
-    do
-    {
+    do {
         cout << activePlayer.playerName << "'s Turn ";
         cout << "Please enter a number between 1 and 7: ";
         cin  >> dropChoice;
@@ -31,7 +29,7 @@ int Connect4::PlayerDrop(char (*board)[10], int activePlayer) {
     }while ( dropChoice < 1 || dropChoice > 7 );
 
     return dropChoice;
-}
+}*/
 
 int Connect4::ComputerDrop( char board[][10])
 {
