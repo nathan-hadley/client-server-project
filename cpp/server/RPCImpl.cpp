@@ -7,6 +7,8 @@
 #include <iterator>
 
 #include "RPCImpl.h"
+#include "Connect4.h"
+
 using namespace std;
 
 RPCImpl::RPCImpl(int socket) {
@@ -67,13 +69,16 @@ void RPCImpl::ProcessRPC() {
 
         if (!bConnected && (aString == "connect")) {
             bConnected = ProcessConnectRPC(arrayTokens);  // Connect RPC
-        }
-
-        else if (bConnected && (aString == "disconnect")) {
+        } else if (bConnected && aString == "playconnect4") {
+            playConnect4RPC(arrayTokens);
+        } else if (bConnected && aString == "playpiece") {
+            playPieceRPC(arrayTokens);
+        } else if (bConnected && aString == "checkstats") {
+            checkStatsRPC();
+        } else if (bConnected && (aString == "disconnect")) {
             ProcessDisconnectRPC();
             printf("Disconnected from client.\n\n");
             bContinue = false; // We are going to leave this loop
-
         } else {
             printf("Error: not an RPC.\n");
         }
@@ -120,9 +125,30 @@ bool RPCImpl::ProcessConnectRPC(vector<string>& arrayTokens) const {
 
 void RPCImpl::playConnect4RPC(vector<string>& arrayTokens) const {
     // TODO
+    //Everything below is temporary
+    Connect4* game = new Connect4();
+
+    char szBuffer[50];
+    strcpy(szBuffer, "******************************************;");
+
+    // Send Response back on our socket
+    int nlen = (int) strlen(szBuffer);
+    szBuffer[nlen] = 0;
+    send(this->m_socket, szBuffer, (int) strlen(szBuffer) + 1, 0);
+
+    // TODO add ability for player to choose if computer or player takes first turn
 }
+
 void RPCImpl::playPieceRPC(vector<string>& arrayTokens) const {
     // TODO
+    //Everything below is temporary
+    char szBuffer[10];
+    strcpy(szBuffer, "9;");
+
+    // Send Response back on our socket
+    int nlen = (int) strlen(szBuffer);
+    szBuffer[nlen] = 0;
+    send(this->m_socket, szBuffer, (int) strlen(szBuffer) + 1, 0);
 }
 void RPCImpl::checkStatsRPC() const {
     // TODO

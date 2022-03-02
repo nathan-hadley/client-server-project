@@ -1,4 +1,4 @@
-# Install script for directory: /home/st/pharvey/cpsc5042/Server/home/st/pharvey/cpsc5042/Server
+# Install script for directory: /home/st/pharvey/cpsc5042/Server/tmp/tmp.xaT8ZHMYfi
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -50,5 +50,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/st/pharvey/cpsc5042/Server/home/st/pharvey/cpsc5042/Server/cmake-build-debug-cs1/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/st/pharvey/cpsc5042/Server/tmp/tmp.xaT8ZHMYfi/cmake-build-debug-cs1/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

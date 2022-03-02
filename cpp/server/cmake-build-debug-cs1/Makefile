@@ -57,10 +57,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/st/pharvey/cpsc5042/Server/home/st/pharvey/cpsc5042/Server
+CMAKE_SOURCE_DIR = /home/st/pharvey/cpsc5042/Server/tmp/tmp.xaT8ZHMYfi
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/st/pharvey/cpsc5042/Server/home/st/pharvey/cpsc5042/Server/cmake-build-debug-cs1
+CMAKE_BINARY_DIR = /home/st/pharvey/cpsc5042/Server/tmp/tmp.xaT8ZHMYfi/cmake-build-debug-cs1
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -87,9 +87,9 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/st/pharvey/cpsc5042/Server/home/st/pharvey/cpsc5042/Server/cmake-build-debug-cs1/CMakeFiles /home/st/pharvey/cpsc5042/Server/home/st/pharvey/cpsc5042/Server/cmake-build-debug-cs1//CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/st/pharvey/cpsc5042/Server/tmp/tmp.xaT8ZHMYfi/cmake-build-debug-cs1/CMakeFiles /home/st/pharvey/cpsc5042/Server/tmp/tmp.xaT8ZHMYfi/cmake-build-debug-cs1//CMakeFiles/progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/st/pharvey/cpsc5042/Server/home/st/pharvey/cpsc5042/Server/cmake-build-debug-cs1/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/st/pharvey/cpsc5042/Server/tmp/tmp.xaT8ZHMYfi/cmake-build-debug-cs1/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -129,29 +129,29 @@ server/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/build
 .PHONY : server/fast
 
-RPCImpl.o: RPCImpl.cpp.o
-.PHONY : RPCImpl.o
+Connect4.o: Connect4.cpp.o
+.PHONY : Connect4.o
 
 # target to build an object file
-RPCImpl.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/RPCImpl.cpp.o
-.PHONY : RPCImpl.cpp.o
+Connect4.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/Connect4.cpp.o
+.PHONY : Connect4.cpp.o
 
-RPCImpl.i: RPCImpl.cpp.i
-.PHONY : RPCImpl.i
+Connect4.i: Connect4.cpp.i
+.PHONY : Connect4.i
 
 # target to preprocess a source file
-RPCImpl.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/RPCImpl.cpp.i
-.PHONY : RPCImpl.cpp.i
+Connect4.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/Connect4.cpp.i
+.PHONY : Connect4.cpp.i
 
-RPCImpl.s: RPCImpl.cpp.s
-.PHONY : RPCImpl.s
+Connect4.s: Connect4.cpp.s
+.PHONY : Connect4.s
 
 # target to generate assembly for a file
-RPCImpl.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/RPCImpl.cpp.s
-.PHONY : RPCImpl.cpp.s
+Connect4.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/server.dir/build.make CMakeFiles/server.dir/Connect4.cpp.s
+.PHONY : Connect4.cpp.s
 
 RPCServer.o: RPCServer.cpp.o
 .PHONY : RPCServer.o
@@ -210,9 +210,9 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... server"
-	@echo "... RPCImpl.o"
-	@echo "... RPCImpl.i"
-	@echo "... RPCImpl.s"
+	@echo "... Connect4.o"
+	@echo "... Connect4.i"
+	@echo "... Connect4.s"
 	@echo "... RPCServer.o"
 	@echo "... RPCServer.i"
 	@echo "... RPCServer.s"
