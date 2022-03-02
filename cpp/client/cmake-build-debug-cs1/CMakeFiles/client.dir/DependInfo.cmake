@@ -8,7 +8,8 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/st/pharvey/cpsc5042/Client/client.cpp" "/home/st/pharvey/cpsc5042/Client/cmake-build-debug-cs1/CMakeFiles/client.dir/client.cpp.o"
+  "/home/st/pharvey/cpsc5042/Server/tmp/tmp.a2xEOrmJqy/Connect4.cpp" "/home/st/pharvey/cpsc5042/Server/tmp/tmp.a2xEOrmJqy/cmake-build-debug-cs1/CMakeFiles/client.dir/Connect4.cpp.o"
+  "/home/st/pharvey/cpsc5042/Server/tmp/tmp.a2xEOrmJqy/client.cpp" "/home/st/pharvey/cpsc5042/Server/tmp/tmp.a2xEOrmJqy/cmake-build-debug-cs1/CMakeFiles/client.dir/client.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

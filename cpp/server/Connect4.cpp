@@ -3,17 +3,49 @@
 #include "Connect4.h"
 using namespace std;
 
-struct Connect4::playerInfo {
-    string playerName;
-    char playerID;
-};
-
-
 // TODO make game logic work
 
+Connect4::Connect4() {
+    trueWidth = 7;
+    trueLength = 6;
+    restart();
+}
+
+void Connect4::CheckBellow (int dropChoice, char playerSymbol)
+{
+    int length, turn;
+    length = 6;
+    turn = 0;
+
+    do
+    {
+        if ( board[length][dropChoice] != 'X' && board[length][dropChoice] != 'O' )
+        {
+            board[length][dropChoice] = playerSymbol;
+            turn = 1;
+        }
+        else
+            --length;
+    }while (  turn != 1 );
+}
+
+void Connect4::restart ()
+{
+    for(int i = 1; i <= 6; i++) {
+        for (int ix = 1; ix <= 7; ix++) {
+            board[i][ix] = '*';
+        }
+    }
+}
+
+/*struct Connect4::playerInfo {
+    string playerName;
+    char playerID;
+};*/
+
 // Moved the commented out code below to client side.
-/*
-int Connect4::PlayerDrop(char board[][10], int activePlayer) {
+
+/*int Connect4::PlayerDrop(char board[][10], int activePlayer) {
     int dropChoice;
     do {
         cout << activePlayer.playerName << "'s Turn ";
@@ -31,6 +63,7 @@ int Connect4::PlayerDrop(char board[][10], int activePlayer) {
     return dropChoice;
 }*/
 
+/*
 int Connect4::ComputerDrop( char board[][10])
 {
     srand(time(0));
@@ -45,49 +78,9 @@ int Connect4::ComputerDrop( char board[][10])
 
     return dropChoice;
 }
+*/
 
-void Connect4::CheckBellow ( char board[][10], playerInfo activePlayer, int dropChoice )
-{
-    int length, turn;
-    length = 6;
-    turn = 0;
-
-    do
-    {
-        if ( board[length][dropChoice] != 'X' && board[length][dropChoice] != 'O' )
-        {
-            board[length][dropChoice] = activePlayer.playerID;
-            turn = 1;
-        }
-        else
-            --length;
-    }while (  turn != 1 );
-
-
-}
-
-void Connect4::DisplayBoard ( char board[][10] )
-{
-    int rows = 6, columns = 7, i, ix;
-
-    for(i = 1; i <= rows; i++)
-    {
-        cout << "|";
-        for(ix = 1; ix <= columns; ix++)
-        {
-            if(board[i][ix] != 'X' && board[i][ix] != 'O')
-                board[i][ix] = '*';
-
-            cout << board[i][ix];
-
-        }
-
-        cout << "|" << endl;
-    }
-
-    cout << endl;
-}
-
+/*
 int Connect4::CheckFour ( char board[][10], playerInfo activePlayer )
 {
     char XO;
@@ -167,23 +160,8 @@ void Connect4::PlayerWin ( playerInfo activePlayer )
     cout << endl << activePlayer.playerName << " Connected Four, You Win!" << endl;
 }
 
-int Connect4::restart ( char board[][10] )
-{
-    int restart;
+ */
+ 
 
-    cout << "Would you like to restart? Yes(1) No(2): ";
-    cin  >> restart;
-    if ( restart == 1 )
-    {
-        for(int i = 1; i <= 6; i++)
-        {
-            for(int ix = 1; ix <= 7; ix++)
-            {
-                board[i][ix] = '*';
-            }
-        }
-    }
-    else
-        cout << "Goodbye!" << endl;
-    return restart;
-}
+ 
+ 

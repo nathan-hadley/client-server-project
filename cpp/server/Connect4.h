@@ -5,21 +5,19 @@
 class Connect4 {
 public:
     Connect4();
-    int PlayerDrop(char board[][10], playerInfo activePlayer );
+    //int PlayerDrop(playerInfo activePlayer );*/
 
 private:
-    struct playerInfo;
-    void CheckBellow (char board[][10], playerInfo activePlayer, int dropChoice);
-    void DisplayBoard (char board[][10]);
+    char board[9][10];
+    int trueWidth;
+    int trueLength;
+    void CheckBellow (int dropChoice, char playerToken);
+    void restart ();
+/*
     int CheckFour (char board[][10], playerInfo activePlayer);
-
-
-    int restart (char board[][10]);
-
     void PlayerWin (playerInfo activePlayer);
     int ComputerDrop(char board[][10]);
-    int FullBoard(char board[][10] );
+    int FullBoard(char board[][10] );*/
 };
-
 
 #endif //SERVER_CONNECT4_H

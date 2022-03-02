@@ -1,0 +1,34 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/cygdrive/c/Users/peter/Documents/Seattle University/Computing Systems II/Group Project/Milestone 2/client-server-project/cpp/client/Connect4.cpp
+iostream
+-
+
+/cygdrive/c/Users/peter/Documents/Seattle University/Computing Systems II/Group Project/Milestone 2/client-server-project/cpp/client/client.cpp
+cstdio
+-
+sys/socket.h
+-
+arpa/inet.h
+-
+unistd.h
+-
+cstring
+-
+vector
+-
+iterator
+-
+iostream
+-
+random
+-
+Connect4.cpp
+/cygdrive/c/Users/peter/Documents/Seattle University/Computing Systems II/Group Project/Milestone 2/client-server-project/cpp/client/Connect4.cpp
+
