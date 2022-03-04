@@ -128,7 +128,6 @@ int main(int argc, char const* argv[]) {
     int valread = (int) read(sock, buffer, 1024);
 
     string board(buffer);
-    game->DisplayBoard(board);
     printf("Return response = %s with valread = %d\n", buffer, valread);
 
     /*
@@ -139,36 +138,65 @@ int main(int argc, char const* argv[]) {
      * 9: Player has won
      * 10: Computer has won
      * */
+    bool continuePlaying = true;
     int gameStatus = 1;
-    while (gameStatus >= 1 && gameStatus <= 8) {
-        string columnChoice;
-        string playPieceRPC;
-        cout << "Please enter which column you'd like to play your piece: ";
-        cin >> columnChoice;
+    while (continuePlaying) {
+        while (gameStatus >= 1 && gameStatus <= 8) {
+            game->DisplayBoard(board);
+            string columnChoice;
+            string playPieceRPC;
+            cout << "Please enter which column you'd like to play your piece: ";
+            cin >> columnChoice;
 
-        // Create string to send to server. Ex.: playpiece;"
-        playPieceRPC.append("playpiece;");//.append(columnChoice); Uncomment this once the server side RPC is implemented
+            // Create string to send to server. Ex.: playpiece;"
+            playPieceRPC.append(
+                    "playpiece;");//.append(columnChoice); Uncomment this once the server side RPC is implemented
 
-        // Copies the characters from playpieceRPC to the buffer array
-        strcpy(buffer, playPieceRPC.c_str());
-        nlen = (int) strlen(buffer);
-        // Puts the null terminator at the end of the connectRPC characters
-        buffer[nlen] = 0;
+            // Copies the characters from playpieceRPC to the buffer array
+            strcpy(buffer, playPieceRPC.c_str());
+            nlen = (int) strlen(buffer);
+            // Puts the null terminator at the end of the connectRPC characters
+            buffer[nlen] = 0;
 
-        // Sends the contents of the buffer through the created socket
-        valwrite = (int) send(sock, buffer, strlen(buffer) + 1, 0);
+            // Sends the contents of the buffer through the created socket
+            valwrite = (int) send(sock, buffer, strlen(buffer) + 1, 0);
 
-        printf("playconnect4 message sent with %d bytes\n", valwrite);
+            printf("playconnect4 message sent with %d bytes\n", valwrite);
 
-        // Assigns the server response to the buffer
-        valread = (int) read(sock, buffer, 1024);
+            // Assigns the server response to the buffer
+            valread = (int) read(sock, buffer, 1024);
 
-        string serverResponse(buffer);
-        gameStatus = stoi(serverResponse);
+            string serverResponse(buffer);
+            gameStatus = stoi(serverResponse);
+            printf("Return response = %i with valread = %d\n", gameStatus, valread);
+        }
+
         game->DisplayBoard(board);
-        printf("Return response = %i with valread = %d\n", gameStatus, valread);
-    }
 
+        string input;
+        if (gameStatus == 8) {
+            cout << "You selected a column that is full. Please try again" << endl;
+            continue;
+        } else if (gameStatus == 9) {
+            cout << "You win! Enter \"y\" to play again. Enter anything else to exit."  << endl;
+            cin >> input;
+            if (input == "y") {
+                gameStatus = 1;
+                continue;
+            } else {
+                continuePlaying = false;
+            }
+        } else if (gameStatus == 10) {
+            cout << "The computer has won! Enter \"y\" to play again. Enter anything else to exit." << endl;
+            cin >> input;
+            if (input == "y") {
+                gameStatus = 1;
+                continue;
+            } else {
+                continuePlaying = false;
+            }
+        }
+    }
     // Obtain a random number from hardware
     random_device rd; 
     // Seed the generator

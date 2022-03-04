@@ -78,7 +78,7 @@ void RPCServer::StartServer() {
     m_address.sin_port = htons(m_port);
 
     // Forcefully attaching socket to the port
-    if (bind(m_server_fd, (struct sockaddr*)&m_address,
+    if (::bind(m_server_fd, (struct sockaddr*)&m_address,
         sizeof(m_address)) < 0) {
         perror("bind failed");
         exit(EXIT_FAILURE);
