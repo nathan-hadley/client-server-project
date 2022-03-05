@@ -8,12 +8,12 @@
 #include <iterator>
 #include <iostream>
 #include <random>
-#include "Connect4.cpp"
+#include "Connect4.h"
 using namespace std;
 
 bool ConnectToServer(const char* serverAddress, int port, int& sock);
 void sendRPC(const string& RPC, const int& sock, vector<string>& arrayTokens);
-vector<string> & ParseTokens(char* buffer, vector<string>& a);
+void ParseTokens(char* buffer, vector<string>& a);
 
 int main(int argc, char const* argv[]) {
     // Takes first command line argument: IP address of the server
@@ -200,7 +200,7 @@ void sendRPC(const string& RPC, const int& sock, vector<string>& arrayTokens) {
  *      buffer: The string to be split
  *      a: The vector to have strings added to
  */
-vector<string>& ParseTokens(char* buffer, vector<string>& a) {
+void ParseTokens(char* buffer, vector<string>& a) {
     char* token;
     char* rest = (char*)buffer;
 
