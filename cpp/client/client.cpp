@@ -12,21 +12,21 @@
 using namespace std;
 
 bool ConnectToServer(const char* serverAddress, int port, int& sock);
-void ParseTokens(char* buffer, vector<string>& a);
+void sendRPC(const string& RPC, const int& sock, vector<string>& arrayTokens);
+vector<string> & ParseTokens(char* buffer, vector<string>& a);
 
 int main(int argc, char const* argv[]) {
-    int sock = 0;
-    // Array of characters created as buffer, which will be passed to server?
-    char buffer[1024] = { 0 };
-    bool validLogin = false;
-
     // Takes first command line argument: IP address of the server
     const char* serverAddress = argv[1];
     // Takes second command line argument: port the server is listening on
     const int port = atoi(argv[2]);
 
+    int sock = 0;
+    vector<string> arrayTokens;
+
     bool bConnect = ConnectToServer(serverAddress, port, sock);
 
+    bool validLogin = false;
     while (bConnect && !validLogin) {
         string username,
         password,
@@ -42,24 +42,10 @@ int main(int argc, char const* argv[]) {
         connectRPC.append("connect;").append(username).append(";");
         connectRPC.append(password).append(";");
 
-        // Copies the characters from connectRPC to the buffer array
-        strcpy(buffer, connectRPC.c_str());
-        int nlen = (int) strlen(buffer);
-        // Puts the null terminator at the end of the connectRPC characters
-        buffer[nlen] = 0;
-
-        // Sends the contents of the buffer through the created socket
-        int valwrite = (int) send(sock, buffer, strlen(buffer) + 1, 0);
-
-        printf("Connect message sent with %d bytes\n", valwrite);
-
-        // Assigns the server response to the buffer
-        int valread = (int) read(sock, buffer, 1024);
-        printf("Return response = %s with valread = %d\n", buffer, valread);
+        sendRPC(connectRPC, sock, arrayTokens);
 
         // Authenticate login
-        int response = atoi(buffer);
-        if (response == 1) {
+        if (stoi(arrayTokens[0]) == 1) {
             validLogin = true;
             printf("Login successful.\n");
         } else
@@ -68,160 +54,67 @@ int main(int argc, char const* argv[]) {
 
     cout << "Welcome to Connect Four!" << endl;
 
-    /*
-     * PlayPieceRPC Section
-     * gameStatus will be what is returned from the server after the RPC call. I think the following might make sense:
-     * Between 1 and 7: The computer's column choice returned from the RPC call
-     * 8: Player has selected a column that is full
-     * 9: Player has won
-     * 10: Computer has won
-     * */
+    // PlayConnect4RPC Section
+    // Needs to be cleaned up and have ability for player to choose if computer
+    // or player takes first turn
     bool continuePlaying = true;
-    bool newGame = true;
-    int gameStatus = 1;
-    Connect4* game = new Connect4();
-    string board;
-    int nlen, valwrite, valread;
-    vector<string> arrayTokens;
     while (continuePlaying) {
-        /*
-                 * PlayConnect4RPC Section
-                 * Needs to be cleaned up and have ability for player to choose if computer or player takes first turn
-                 *
-                 * */
-        string playConnect4RPC;
+        auto* game = new Connect4();
+
         string turnChoice = "";
         while (turnChoice != "1" && turnChoice != "2") {
-            cout << "To start a new game, enter \"1\" to take the first turn, or enter \"2\" for the computer to take the first turn: ";
+            cout << "To start a new game, enter \"1\" to take the first turn, "
+                    "or enter \"2\" for the computer to take the first turn: ";
             cin >> turnChoice;
         }
 
         // Create string to send to server. Ex.: playconnectfour;"
+        string playConnect4RPC;
         playConnect4RPC.append("playconnect4;").append(turnChoice);
 
-        // Copies the characters from connectRPC to the buffer array
-        strcpy(buffer, playConnect4RPC.c_str());
-        nlen = (int) strlen(buffer);
-        // Puts the null terminator at the end of the connectRPC characters
-        buffer[nlen] = 0;
+        sendRPC(playConnect4RPC, sock, arrayTokens);
 
-        // Sends the contents of the buffer through the created socket
-        valwrite = (int) send(sock, buffer, strlen(buffer) + 1, 0);
+        // PlayPieceRPC Section
+        // gameStatus will be what is returned from the server after the RPC
+        // call. I think the following might make sense:
+        // 1-7: The computer's column choice returned from the RPC call
+        // 8: Player has selected a column that is full
+        // 9: Player has won
+        // 10: Computer has won
+        int gameStatus;
+        do {
+            game->displayBoard(arrayTokens[0]);
+            string columnChoice = game->getColumnChoice();
 
-        printf("playconnect4 message sent with %d bytes\n", valwrite);
-
-        // Assigns the server response to the buffer
-        valread = (int) read(sock, buffer, 1024);
-
-        arrayTokens.clear();
-        ParseTokens(buffer, arrayTokens);
-        printf("Return response = %s with valread = %d\n", buffer, valread);
-
-        while (gameStatus >= 1 && gameStatus <= 8) {
-            game->DisplayBoard(arrayTokens[0]);
-            string columnChoice = "";
+            // Create string to send to server.
             string playPieceRPC;
-
-            while (columnChoice != "1"  && columnChoice != "2"  && columnChoice != "3"
-                && columnChoice != "4"  && columnChoice != "5"  && columnChoice != "6"  && columnChoice != "7") {
-                cout << "Please enter which column you'd like to play your piece (must be between 1 and 7): ";
-                cin >> columnChoice;
-            }
-
-            // Create string to send to server. Ex.: playpiece;"
             playPieceRPC.append("playpiece;").append(columnChoice).append(";");
 
-            // Copies the characters from playpieceRPC to the buffer array
-            strcpy(buffer, playPieceRPC.c_str());
-            nlen = (int) strlen(buffer);
-            // Puts the null terminator at the end of the connectRPC characters
-            buffer[nlen] = 0;
+            sendRPC(playPieceRPC, sock, arrayTokens);
 
-            // Sends the contents of the buffer through the created socket
-            valwrite = (int) send(sock, buffer, strlen(buffer) + 1, 0);
-
-            printf("playconnect4 message sent with %d bytes\n", valwrite);
-
-            // Assigns the server response to the buffer
-            valread = (int) read(sock, buffer, 1024);
-
-            arrayTokens.clear();
-            ParseTokens(buffer, arrayTokens);
             gameStatus = stoi(arrayTokens[1]);
-            printf("Return response = %i with valread = %d\n", gameStatus, valread);
-        }
 
-        game->DisplayBoard(arrayTokens[0]);
+            if (gameStatus == 8)
+                printf("You selected a column that is full. Please try again");
 
-        string input;
-        if (gameStatus == 8) {
-            cout << "You selected a column that is full. Please try again" << endl;
-            continue;
-        } else if (gameStatus == 9) {
-            cout << "You win! Enter \"y\" to play again. Enter anything else to exit."  << endl;
-            cin >> input;
-            if (input == "y") {
-                gameStatus = 1;
-                continue;
-            } else {
-                continuePlaying = false;
-            }
-        } else if (gameStatus == 10) {
-            cout << "The computer has won! Enter \"y\" to play again. Enter anything else to exit." << endl;
-            cin >> input;
-            if (input == "y") {
-                gameStatus = 1;
-                continue;
-            } else {
-                continuePlaying = false;
-            }
-        } else if (gameStatus == 11) {
-            cout << "The game board is full! Enter \"y\" to play again. Enter anything else to exit." << endl;
-            cin >> input;
-            if (input == "y") {
-                gameStatus = 1;
-                continue;
-            } else {
-                continuePlaying = false;
-            }
-        } else {
-            cout << "There was an error in the game. Enter \"y\" to play again. Enter anything else to exit." << endl;
-            cin >> input;
-            if (input == "y") {
-                gameStatus = 1;
-                continue;
-            } else {
-                continuePlaying = false;
-            }
-        }
+        } while (gameStatus >= 1 && gameStatus <= 8);
+
+        game->displayBoard(arrayTokens[0]);
+
+        continuePlaying = game->gameOver(gameStatus);
     }
 
     // Do a disconnect Message
     if (bConnect) {
         
         string exit;
-        const char* disconnectRPC = "disconnect;";
-        
         while (exit != "EXIT") {
             cout << "Type 'EXIT' to disconnect" << endl;
             cin >> exit;
-        }            
+        }
 
-        // Copies the contents of the logoffRPC to the buffer
-        strcpy(buffer, disconnectRPC);
-        int nlen = (int) strlen(buffer);
-
-        // Put null terminator at the end of the logoffRPC characters in the buffer
-        buffer[nlen] = 0;
-
-        // Sends the contents of the buffer through the created socket
-        int valwrite = (int) send(sock, buffer, strlen(buffer) + 1, 0);
-
-        printf("Disconnect message sent with %d bytes\n", valwrite);
-
-        // Assign the server response to the buffer
-        int valread = (int) read(sock, buffer, 1024);
-        printf("Return response = %s with valread = %d\n", buffer, valread);
+        const char* disconnectRPC = "disconnect;";
+        sendRPC(disconnectRPC, sock, arrayTokens);
 
     } else {
         printf("Exit without calling RPC");
@@ -237,9 +130,9 @@ int main(int argc, char const* argv[]) {
  * ConnectToServer will connect to the Server based on command line
  *
  * Input:
- *      serverAddress: The IP address of the server
- *      port: The port the server is listening on
- *      sock (passed by reference): A variable that will be assigned the socket
+ *      serverAddress: The IP address of the server.
+ *      port: The port the server is listening on.
+ *      sock (passed by reference): A variable that will be assigned the socket.
  * Output:
  *      Returns true if a connection to the server is successful, false otherwise.
 */
@@ -268,6 +161,38 @@ bool ConnectToServer(const char* serverAddress, int port, int& sock) {
 }
 
 /*
+ * Sends RPC to server.
+ *
+ * Input:
+ *      RPC: string RPC.
+ *      sock: socket to send message on.
+ *      arrayTokens (passed by reference): token array to write buffer to.
+ */
+void sendRPC(const string& RPC, const int& sock, vector<string>& arrayTokens) {
+    // Array of characters created as buffer, which will be passed to server
+    char buffer[1024] = { 0 };
+    int nlen, valwrite, valread;
+
+    // Copies the characters from connectRPC to the buffer array
+    strcpy(buffer, RPC.c_str());
+    nlen = (int) strlen(buffer);
+    // Puts the null terminator at the end of the connectRPC characters
+    buffer[nlen] = 0;
+
+    // Sends the contents of the buffer through the created socket
+    valwrite = (int) send(sock, buffer, strlen(buffer) + 1, 0);
+
+    printf("Message sent with %d bytes\n", valwrite);
+
+    // Assigns the server response to the buffer
+    valread = (int) read(sock, buffer, 1024);
+    printf("Return response = %s with valread = %d\n", buffer, valread);
+
+    arrayTokens.clear();
+    ParseTokens(buffer, arrayTokens);
+}
+
+/*
  * ParseTokens splits a string by semicolons and adds all strings to the input
  * vector.
  *
@@ -275,7 +200,7 @@ bool ConnectToServer(const char* serverAddress, int port, int& sock) {
  *      buffer: The string to be split
  *      a: The vector to have strings added to
  */
-void ParseTokens(char* buffer, vector<string>& a) {
+vector<string>& ParseTokens(char* buffer, vector<string>& a) {
     char* token;
     char* rest = (char*)buffer;
 

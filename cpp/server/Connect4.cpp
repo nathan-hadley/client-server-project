@@ -11,27 +11,22 @@ Connect4::Connect4() {
     restart();
 }
 
-void Connect4::CheckBellow (int dropChoice, char playerSymbol)
-{
+void Connect4::CheckBellow (int dropChoice, char playerSymbol) {
     int length, turn;
     length = 6;
     turn = 0;
 
-    do
-    {
-        if ( board[length][dropChoice] != 'X' && board[length][dropChoice] != 'O' )
-        {
+    do {
+        if (board[length][dropChoice] != 'X' && board[length][dropChoice] != 'O') {
             board[length][dropChoice] = playerSymbol;
             turn = 1;
-        }
-        else
+        } else
             --length;
-    }while (  turn != 1 );
+    } while (turn != 1);
 }
 
-void Connect4::restart ()
-{
-    for(int i = 1; i <= 6; i++) {
+void Connect4::restart() {
+    for (int i = 1; i <= 6; i++) {
         for (int ix = 1; ix <= 7; ix++) {
             board[i][ix] = '*';
         }
