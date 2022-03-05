@@ -132,10 +132,7 @@ void RPCImpl::playConnect4RPC(vector<string>& arrayTokens)  {
     // TODO
     //Everything below is temporary
 
-    //Mutex code to increment the number of games played by each client
-    // It seems to only count 1 game per client for now
-    // number is displayed in ProcessRPC, right after token disconnect is received
-    pthread_mutex_lock(&myMutex);
+
 
     Connect4* game = new Connect4();
 
@@ -147,6 +144,10 @@ void RPCImpl::playConnect4RPC(vector<string>& arrayTokens)  {
     szBuffer[nlen] = 0;
     send(this->m_socket, szBuffer, (int) strlen(szBuffer) + 1, 0);
 
+    //Mutex code to increment the number of games played by each client
+    // It seems to only count 1 game per client for now
+    // number is displayed in ProcessRPC, right after token disconnect is received
+    pthread_mutex_lock(&myMutex);
     //increment
     j++;
     pthread_mutex_unlock(&myMutex);

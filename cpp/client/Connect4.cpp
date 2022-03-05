@@ -31,11 +31,15 @@ class Connect4 {
     public: void DisplayBoard (string board) {
         int rows = 6, columns = 7, i, ix;
 
+        cout << endl;
+        cout << "Connect Four Game Board" << endl;
+
         for (i = 1; i <= rows; i++) {
-            cout << "|";
+            cout << "\t|";
             cout << board.substr((i-1)*rows,columns);
             cout << "|" << endl;
         }
         cout << endl;
     }
+
 };
