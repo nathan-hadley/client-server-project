@@ -9,20 +9,6 @@ Connect4::Connect4() {
     restart();
 }
 
-void Connect4::CheckBellow (int dropChoice, char playerSymbol) {
-    int length, turn;
-    length = 6;
-    turn = 0;
-
-    do {
-        if (board[length][dropChoice] != 'X' && board[length][dropChoice] != 'O') {
-            board[length][dropChoice] = playerSymbol;
-            turn = 1;
-        } else
-            --length;
-    } while (turn != 1);
-}
-
 void Connect4::restart() {
     for (int i = 1; i <= 6; i++) {
         for (int ix = 1; ix <= 7; ix++) {
@@ -30,8 +16,6 @@ void Connect4::restart() {
         }
     }
 }
-
-//while ( board[1][dropChoice] == 'X' || board[1][dropChoice] == 'O' )
 
 // client always 'X'
 bool Connect4::clientDrop(int dropChoice) {

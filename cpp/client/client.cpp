@@ -52,7 +52,7 @@ int main(int argc, char const* argv[]) {
         } else
             printf("Invalid username and/or password.\n");
     }
-    
+
     // PlayConnect4RPC Section
     // Needs to be cleaned up and have ability for player to choose if computer
     // or player takes first turn
