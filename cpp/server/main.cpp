@@ -9,11 +9,13 @@
  *          - Connect
  *          - Disconnect
 */
-
 #include <cstdio>
 #include "RPCServer.h"
+#include <pthread.h>
 using namespace std;
 
+int j;
+pthread_mutex_t  myMutex;
 // Main function for the server.
 int main(int argc, char const* argv[]) {
 
@@ -21,11 +23,14 @@ int main(int argc, char const* argv[]) {
     int port = atoi(argv[2]);
 
     auto* serverObj = new RPCServer(serverIP, port);
+    pthread_mutex_init(&myMutex, nullptr);
 
     serverObj->StartServer();
     printf("\nServer is running.\nWaiting.\n");
     serverObj->ListenForClient();
 
+    pthread_mutex_destroy(&myMutex);
     delete serverObj;
+    pthread_exit(nullptr);
     return 0;
 }

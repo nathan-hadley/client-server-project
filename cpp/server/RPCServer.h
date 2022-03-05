@@ -35,4 +35,5 @@ private:
     char* m_serverIP;
     int m_port;
     struct sockaddr_in m_address{};
+
 };

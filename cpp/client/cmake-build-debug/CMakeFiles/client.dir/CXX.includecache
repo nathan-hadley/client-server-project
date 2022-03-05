@@ -6,11 +6,11 @@
 
 #IncludeRegexTransform: 
 
-/cygdrive/c/Users/peter/Documents/Seattle University/Computing Systems II/Group Project/Milestone 2/client-server-project/cpp/client/Connect4.cpp
+/Users/FelixMinhVu/Documents/GitHub/client-server-project/cpp/client/Connect4.cpp
 iostream
 -
 
-/cygdrive/c/Users/peter/Documents/Seattle University/Computing Systems II/Group Project/Milestone 2/client-server-project/cpp/client/client.cpp
+/Users/FelixMinhVu/Documents/GitHub/client-server-project/cpp/client/client.cpp
 cstdio
 -
 sys/socket.h
@@ -30,5 +30,5 @@ iostream
 random
 -
 Connect4.cpp
-/cygdrive/c/Users/peter/Documents/Seattle University/Computing Systems II/Group Project/Milestone 2/client-server-project/cpp/client/Connect4.cpp
+/Users/FelixMinhVu/Documents/GitHub/client-server-project/cpp/client/Connect4.cpp
 

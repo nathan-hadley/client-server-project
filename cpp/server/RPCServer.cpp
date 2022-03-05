@@ -43,6 +43,7 @@ void* initThread(void* vargp) {
  *      port: The port the server will be listening on
  */
 RPCServer::RPCServer(const char* serverIP, int port) {
+    int j = 0;
     m_serverIP = (char*)serverIP;
     m_port = port;
 }
