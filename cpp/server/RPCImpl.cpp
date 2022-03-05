@@ -159,8 +159,8 @@ void RPCImpl::playConnect4RPC(vector<string>& arrayTokens)  {
 void RPCImpl::playPieceRPC(vector<string>& arrayTokens) const {
     // TODO
     //Everything below is temporary
-    char szBuffer[10];
-    strcpy(szBuffer, "9;");
+    char szBuffer[50];
+    strcpy(szBuffer, "******************************************;9;");
 
     // Send Response back on our socket
     int nlen = (int) strlen(szBuffer);
