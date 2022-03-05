@@ -48,18 +48,22 @@ int main(int argc, char const* argv[]) {
         if (stoi(arrayTokens[0]) == 1) {
             validLogin = true;
             printf("Login successful.\n");
+            cout << "Welcome to Connect Four!" << endl;
         } else
             printf("Invalid username and/or password.\n");
     }
 
+<<<<<<< Updated upstream
     cout << endl;
     cout << "Welcome to Connect Four!" << endl;
 
+=======
+>>>>>>> Stashed changes
     // PlayConnect4RPC Section
     // Needs to be cleaned up and have ability for player to choose if computer
     // or player takes first turn
     bool continuePlaying = true;
-    while (continuePlaying) {
+    while (continuePlaying && bConnect) {
         auto* game = new Connect4();
 
         string turnChoice = "";

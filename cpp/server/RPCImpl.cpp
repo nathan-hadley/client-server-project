@@ -134,7 +134,7 @@ void RPCImpl::playConnect4RPC(vector<string>& arrayTokens)  {
 
 
 
-    Connect4* game = new Connect4();
+    auto* game = new Connect4();
 
     char szBuffer[50];
     strcpy(szBuffer, "******************************************;");

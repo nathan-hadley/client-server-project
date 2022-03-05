@@ -6,8 +6,6 @@ using namespace std;
 // TODO make game logic work
 
 Connect4::Connect4() {
-    trueWidth = 7;
-    trueLength = 6;
     restart();
 }
 
@@ -33,47 +31,48 @@ void Connect4::restart() {
     }
 }
 
-/*struct Connect4::playerInfo {
-    string playerName;
-    char playerID;
-};*/
+//while ( board[1][dropChoice] == 'X' || board[1][dropChoice] == 'O' )
 
-// Moved the commented out code below to client side.
-
-/*int Connect4::PlayerDrop(char board[][10], int activePlayer) {
-    int dropChoice;
-    do {
-        cout << activePlayer.playerName << "'s Turn ";
-        cout << "Please enter a number between 1 and 7: ";
-        cin  >> dropChoice;
-
-        while ( board[1][dropChoice] == 'X' || board[1][dropChoice] == 'O' )
-        {
-            cout << "That row is full, please enter a new row: ";
-            cin  >> dropChoice;
+// client always 'X'
+bool Connect4::clientDrop(int dropChoice) {
+    if (board[0][dropChoice] != '*') {
+        int i = 0;
+        while (board[i][dropChoice] != '*') {
+            i++;
         }
-
-    }while ( dropChoice < 1 || dropChoice > 7 );
-
-    return dropChoice;
-}*/
-
-/*
-int Connect4::ComputerDrop( char board[][10])
-{
-    srand(time(0));
-    int dropChoice = rand() % 7;
-
-    while ( board[1][dropChoice] == 'X' || board[1][dropChoice] == 'O' )
-    {
-        dropChoice = rand() % 7;
+        board[i][dropChoice] = 'X';
+        return true;
     }
-
-    cout << "Computer has chosen row " << dropChoice << "." << endl << endl;
-
-    return dropChoice;
+    return false;
 }
-*/
+
+// computer always '0'
+void Connect4::computerDrop() {
+    srand(time(0));
+    int dropChoice;
+
+    do {
+        dropChoice = rand() % 7;
+    } while (board[0][dropChoice] != '*');
+
+    int i = 0;
+    while (board[i][dropChoice] != '*') {
+        i++;
+    }
+    board[i][dropChoice] = 'X';
+}
+
+bool Connect4::fullBoard() {
+    int full = 0;
+    for (int i = 0; i < 7; i++ ) {
+        if (board[0][i] != '*' )
+            full++;
+    }
+    if (full == 7)
+        return true;
+    else return false;
+}
+
 
 /*
 int Connect4::CheckFour ( char board[][10], playerInfo activePlayer )
@@ -135,19 +134,6 @@ int Connect4::CheckFour ( char board[][10], playerInfo activePlayer )
     }
 
     return win;
-}
-
-int Connect4::FullBoard( char board[][10] )
-{
-    int full;
-    full = 0;
-    for ( int i = 1; i <= 7; ++i )
-    {
-        if ( board[1][i] != '*' )
-            ++full;
-    }
-
-    return full;
 }
 
 void Connect4::PlayerWin ( playerInfo activePlayer )
