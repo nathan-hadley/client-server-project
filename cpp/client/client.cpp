@@ -12,7 +12,7 @@
 using namespace std;
 
 bool ConnectToServer(const char* serverAddress, int port, int& sock);
-string convertToString (char* a, int size);
+void ParseTokens(char* buffer, vector<string>& a);
 
 int main(int argc, char const* argv[]) {
     int sock = 0;
@@ -82,6 +82,7 @@ int main(int argc, char const* argv[]) {
     Connect4* game = new Connect4();
     string board;
     int nlen, valwrite, valread;
+    vector<string> arrayTokens;
     while (continuePlaying) {
         /*
                  * PlayConnect4RPC Section
@@ -112,12 +113,12 @@ int main(int argc, char const* argv[]) {
         // Assigns the server response to the buffer
         valread = (int) read(sock, buffer, 1024);
 
-        int bLen = strlen(buffer);
-        board = convertToString(buffer, bLen);
+        arrayTokens.clear();
+        ParseTokens(buffer, arrayTokens);
         printf("Return response = %s with valread = %d\n", buffer, valread);
 
         while (gameStatus >= 1 && gameStatus <= 8) {
-            game->DisplayBoard(board);
+            game->DisplayBoard(arrayTokens[0]);
             string columnChoice = "";
             string playPieceRPC;
 
@@ -128,7 +129,7 @@ int main(int argc, char const* argv[]) {
             }
 
             // Create string to send to server. Ex.: playpiece;"
-            playPieceRPC.append("playpiece;").append(columnChoice);
+            playPieceRPC.append("playpiece;").append(columnChoice).append(";");
 
             // Copies the characters from playpieceRPC to the buffer array
             strcpy(buffer, playPieceRPC.c_str());
@@ -144,12 +145,13 @@ int main(int argc, char const* argv[]) {
             // Assigns the server response to the buffer
             valread = (int) read(sock, buffer, 1024);
 
-            string serverResponse(buffer);
-            gameStatus = stoi(serverResponse);
+            arrayTokens.clear();
+            ParseTokens(buffer, arrayTokens);
+            gameStatus = stoi(arrayTokens[1]);
             printf("Return response = %i with valread = %d\n", gameStatus, valread);
         }
 
-        game->DisplayBoard(board);
+        game->DisplayBoard(arrayTokens[0]);
 
         string input;
         if (gameStatus == 8) {
@@ -266,14 +268,18 @@ bool ConnectToServer(const char* serverAddress, int port, int& sock) {
 }
 
 /*
- * Converts an array of character to a string
-*/
-string convertToString (char* a, int size) {
-    string s = "";
+ * ParseTokens splits a string by semicolons and adds all strings to the input
+ * vector.
+ *
+ * Input:
+ *      buffer: The string to be split
+ *      a: The vector to have strings added to
+ */
+void ParseTokens(char* buffer, vector<string>& a) {
+    char* token;
+    char* rest = (char*)buffer;
 
-    for (int i = 0; i < size; i++) {
-        s = s + a[i];
+    while ((token = strtok_r(rest, ";", &rest))) {
+        a.emplace_back(token);
     }
-
-    return s;
 }
