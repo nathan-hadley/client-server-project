@@ -52,6 +52,7 @@ int main(int argc, char const* argv[]) {
             printf("Invalid username and/or password.\n");
     }
 
+    cout << endl;
     cout << "Welcome to Connect Four!" << endl;
 
     // PlayConnect4RPC Section
@@ -96,6 +97,9 @@ int main(int argc, char const* argv[]) {
 
             if (gameStatus == 8)
                 printf("You selected a column that is full. Please try again");
+            else if (gameStatus >= 1 && gameStatus <= 8) {
+                cout << "The computer has selected column " << gameStatus << "." << endl;
+            }
 
         } while (gameStatus >= 1 && gameStatus <= 8);
 
@@ -171,7 +175,7 @@ bool ConnectToServer(const char* serverAddress, int port, int& sock) {
 void sendRPC(const string& RPC, const int& sock, vector<string>& arrayTokens) {
     // Array of characters created as buffer, which will be passed to server
     char buffer[1024] = { 0 };
-    int nlen, valwrite, valread;
+    int nlen;
 
     // Copies the characters from connectRPC to the buffer array
     strcpy(buffer, RPC.c_str());
@@ -180,13 +184,10 @@ void sendRPC(const string& RPC, const int& sock, vector<string>& arrayTokens) {
     buffer[nlen] = 0;
 
     // Sends the contents of the buffer through the created socket
-    valwrite = (int) send(sock, buffer, strlen(buffer) + 1, 0);
-
-    printf("Message sent with %d bytes\n", valwrite);
+    send(sock, buffer, strlen(buffer) + 1, 0);
 
     // Assigns the server response to the buffer
-    valread = (int) read(sock, buffer, 1024);
-    printf("Return response = %s with valread = %d\n", buffer, valread);
+    read(sock, buffer, 1024);
 
     arrayTokens.clear();
     ParseTokens(buffer, arrayTokens);

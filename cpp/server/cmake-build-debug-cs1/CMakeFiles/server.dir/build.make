@@ -53,10 +53,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/st/pharvey/cpsc5042/Server/tmp/tmp.xaT8ZHMYfi
+CMAKE_SOURCE_DIR = /home/st/pharvey/cpsc5042/Server/tmp/tmp.iVaCBSaTTX
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/st/pharvey/cpsc5042/Server/tmp/tmp.xaT8ZHMYfi/cmake-build-debug-cs1
+CMAKE_BINARY_DIR = /home/st/pharvey/cpsc5042/Server/tmp/tmp.iVaCBSaTTX/cmake-build-debug-cs1
 
 # Include any dependencies generated for this target.
 include CMakeFiles/server.dir/depend.make
@@ -68,42 +68,42 @@ include CMakeFiles/server.dir/flags.make
 
 CMakeFiles/server.dir/main.cpp.o: CMakeFiles/server.dir/flags.make
 CMakeFiles/server.dir/main.cpp.o: ../main.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/st/pharvey/cpsc5042/Server/tmp/tmp.xaT8ZHMYfi/cmake-build-debug-cs1/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/server.dir/main.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/server.dir/main.cpp.o -c /home/st/pharvey/cpsc5042/Server/tmp/tmp.xaT8ZHMYfi/main.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/st/pharvey/cpsc5042/Server/tmp/tmp.iVaCBSaTTX/cmake-build-debug-cs1/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/server.dir/main.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/server.dir/main.cpp.o -c /home/st/pharvey/cpsc5042/Server/tmp/tmp.iVaCBSaTTX/main.cpp
 
 CMakeFiles/server.dir/main.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/server.dir/main.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/st/pharvey/cpsc5042/Server/tmp/tmp.xaT8ZHMYfi/main.cpp > CMakeFiles/server.dir/main.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/st/pharvey/cpsc5042/Server/tmp/tmp.iVaCBSaTTX/main.cpp > CMakeFiles/server.dir/main.cpp.i
 
 CMakeFiles/server.dir/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/server.dir/main.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/st/pharvey/cpsc5042/Server/tmp/tmp.xaT8ZHMYfi/main.cpp -o CMakeFiles/server.dir/main.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/st/pharvey/cpsc5042/Server/tmp/tmp.iVaCBSaTTX/main.cpp -o CMakeFiles/server.dir/main.cpp.s
 
 CMakeFiles/server.dir/RPCServer.cpp.o: CMakeFiles/server.dir/flags.make
 CMakeFiles/server.dir/RPCServer.cpp.o: ../RPCServer.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/st/pharvey/cpsc5042/Server/tmp/tmp.xaT8ZHMYfi/cmake-build-debug-cs1/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/server.dir/RPCServer.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/server.dir/RPCServer.cpp.o -c /home/st/pharvey/cpsc5042/Server/tmp/tmp.xaT8ZHMYfi/RPCServer.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/st/pharvey/cpsc5042/Server/tmp/tmp.iVaCBSaTTX/cmake-build-debug-cs1/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/server.dir/RPCServer.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/server.dir/RPCServer.cpp.o -c /home/st/pharvey/cpsc5042/Server/tmp/tmp.iVaCBSaTTX/RPCServer.cpp
 
 CMakeFiles/server.dir/RPCServer.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/server.dir/RPCServer.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/st/pharvey/cpsc5042/Server/tmp/tmp.xaT8ZHMYfi/RPCServer.cpp > CMakeFiles/server.dir/RPCServer.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/st/pharvey/cpsc5042/Server/tmp/tmp.iVaCBSaTTX/RPCServer.cpp > CMakeFiles/server.dir/RPCServer.cpp.i
 
 CMakeFiles/server.dir/RPCServer.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/server.dir/RPCServer.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/st/pharvey/cpsc5042/Server/tmp/tmp.xaT8ZHMYfi/RPCServer.cpp -o CMakeFiles/server.dir/RPCServer.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/st/pharvey/cpsc5042/Server/tmp/tmp.iVaCBSaTTX/RPCServer.cpp -o CMakeFiles/server.dir/RPCServer.cpp.s
 
 CMakeFiles/server.dir/Connect4.cpp.o: CMakeFiles/server.dir/flags.make
 CMakeFiles/server.dir/Connect4.cpp.o: ../Connect4.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/st/pharvey/cpsc5042/Server/tmp/tmp.xaT8ZHMYfi/cmake-build-debug-cs1/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/server.dir/Connect4.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/server.dir/Connect4.cpp.o -c /home/st/pharvey/cpsc5042/Server/tmp/tmp.xaT8ZHMYfi/Connect4.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/st/pharvey/cpsc5042/Server/tmp/tmp.iVaCBSaTTX/cmake-build-debug-cs1/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/server.dir/Connect4.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/server.dir/Connect4.cpp.o -c /home/st/pharvey/cpsc5042/Server/tmp/tmp.iVaCBSaTTX/Connect4.cpp
 
 CMakeFiles/server.dir/Connect4.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/server.dir/Connect4.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/st/pharvey/cpsc5042/Server/tmp/tmp.xaT8ZHMYfi/Connect4.cpp > CMakeFiles/server.dir/Connect4.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/st/pharvey/cpsc5042/Server/tmp/tmp.iVaCBSaTTX/Connect4.cpp > CMakeFiles/server.dir/Connect4.cpp.i
 
 CMakeFiles/server.dir/Connect4.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/server.dir/Connect4.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/st/pharvey/cpsc5042/Server/tmp/tmp.xaT8ZHMYfi/Connect4.cpp -o CMakeFiles/server.dir/Connect4.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/st/pharvey/cpsc5042/Server/tmp/tmp.iVaCBSaTTX/Connect4.cpp -o CMakeFiles/server.dir/Connect4.cpp.s
 
 # Object files for target server
 server_OBJECTS = \
@@ -119,7 +119,7 @@ server: CMakeFiles/server.dir/RPCServer.cpp.o
 server: CMakeFiles/server.dir/Connect4.cpp.o
 server: CMakeFiles/server.dir/build.make
 server: CMakeFiles/server.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/st/pharvey/cpsc5042/Server/tmp/tmp.xaT8ZHMYfi/cmake-build-debug-cs1/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking CXX executable server"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/st/pharvey/cpsc5042/Server/tmp/tmp.iVaCBSaTTX/cmake-build-debug-cs1/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking CXX executable server"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/server.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -131,6 +131,6 @@ CMakeFiles/server.dir/clean:
 .PHONY : CMakeFiles/server.dir/clean
 
 CMakeFiles/server.dir/depend:
-	cd /home/st/pharvey/cpsc5042/Server/tmp/tmp.xaT8ZHMYfi/cmake-build-debug-cs1 && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/st/pharvey/cpsc5042/Server/tmp/tmp.xaT8ZHMYfi /home/st/pharvey/cpsc5042/Server/tmp/tmp.xaT8ZHMYfi /home/st/pharvey/cpsc5042/Server/tmp/tmp.xaT8ZHMYfi/cmake-build-debug-cs1 /home/st/pharvey/cpsc5042/Server/tmp/tmp.xaT8ZHMYfi/cmake-build-debug-cs1 /home/st/pharvey/cpsc5042/Server/tmp/tmp.xaT8ZHMYfi/cmake-build-debug-cs1/CMakeFiles/server.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/st/pharvey/cpsc5042/Server/tmp/tmp.iVaCBSaTTX/cmake-build-debug-cs1 && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/st/pharvey/cpsc5042/Server/tmp/tmp.iVaCBSaTTX /home/st/pharvey/cpsc5042/Server/tmp/tmp.iVaCBSaTTX /home/st/pharvey/cpsc5042/Server/tmp/tmp.iVaCBSaTTX/cmake-build-debug-cs1 /home/st/pharvey/cpsc5042/Server/tmp/tmp.iVaCBSaTTX/cmake-build-debug-cs1 /home/st/pharvey/cpsc5042/Server/tmp/tmp.iVaCBSaTTX/cmake-build-debug-cs1/CMakeFiles/server.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/server.dir/depend
 

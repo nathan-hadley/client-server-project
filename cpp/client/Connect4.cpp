@@ -33,16 +33,16 @@ string Connect4::getColumnChoice() {
 bool Connect4::gameOver(int gameStatus) {
     switch (gameStatus) {
         case 9:
-            printf("You win!");
+            printf("You win!\n");
             break;
         case 10:
-            printf("The computer won!");
+            printf("The computer won!\n");
             break;
         case 11:
-            printf("The game board is full!");
+            printf("The game board is full!\n");
             break;
         default:
-            printf("There was an error in the game.");
+            printf("There was an error in the game.\n");
             break;
     }
 
