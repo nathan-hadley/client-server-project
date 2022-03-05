@@ -52,13 +52,7 @@ int main(int argc, char const* argv[]) {
         } else
             printf("Invalid username and/or password.\n");
     }
-
-<<<<<<< Updated upstream
-    cout << endl;
-    cout << "Welcome to Connect Four!" << endl;
-
-=======
->>>>>>> Stashed changes
+    
     // PlayConnect4RPC Section
     // Needs to be cleaned up and have ability for player to choose if computer
     // or player takes first turn
