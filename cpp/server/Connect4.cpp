@@ -17,6 +17,7 @@ void Connect4::restart() {
     }
 }
 
+// assumes board is not full. Use fullBoard() to check.
 // client always 'X'
 bool Connect4::clientDrop(int dropChoice) {
     if (board[0][dropChoice] != '*') {
@@ -30,6 +31,7 @@ bool Connect4::clientDrop(int dropChoice) {
     return false;
 }
 
+// assumes board is not full. Use fullBoard() to check.
 // computer always '0'
 void Connect4::computerDrop() {
     srand(time(0));
