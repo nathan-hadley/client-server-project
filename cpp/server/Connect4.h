@@ -3,13 +3,12 @@
 
 using namespace std;
 
-// TODO game logic
 class Connect4 {
 public:
     Connect4();
     bool clientDrop(int dropChoice);
     void computerDrop();
-    int checkFour (string activePlayer);
+    bool checkFour(bool client);
 
 private:
     char board[7][6];
@@ -17,7 +16,7 @@ private:
 
     void restart();
     bool fullBoard();
-    //void PlayerWin (playerInfo activePlayer);
+    void playerWin (bool client);
 };
 
 #endif //SERVER_CONNECT4_H

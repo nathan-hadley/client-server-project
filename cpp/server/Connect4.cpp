@@ -1,18 +1,15 @@
 #include <string>
-#include <iostream>
 #include "Connect4.h"
 using namespace std;
-
-// TODO make game logic work
 
 Connect4::Connect4() {
     restart();
 }
 
 void Connect4::restart() {
-    for (int i = 1; i <= 6; i++) {
-        for (int ix = 1; ix <= 7; ix++) {
-            board[i][ix] = '*';
+    for (int i = 0; i < 6; i++) {
+        for (int j = 0; j < 7; j++) {
+            board[i][j] = '*';
         }
     }
 }
@@ -48,6 +45,7 @@ void Connect4::computerDrop() {
     board[i][dropChoice] = 'X';
 }
 
+// Checks for full board.
 bool Connect4::fullBoard() {
     int full = 0;
     for (int i = 0; i < 7; i++ ) {
@@ -60,74 +58,51 @@ bool Connect4::fullBoard() {
 }
 
 
-/*
-int Connect4::CheckFour ( char board[][10], playerInfo activePlayer )
-{
+// Checks for four-in-a-row
+bool Connect4::checkFour(bool client) {
     char XO;
-    int win;
+    bool win = false;
 
-    XO = activePlayer.playerID;
-    win = 0;
+    if (client)
+        XO = 'X';
+    else
+        XO = '0';
 
-    for( int i = 8; i >= 1; --i )
-    {
+    for (int i = 6; i >= 0; i--) {
+        for (int j = 7; j >= 0; j--) {
 
-        for( int ix = 9; ix >= 1; --ix )
-        {
+            if (board[i][j] == XO && board[i-1][j-1] == XO &&
+               board[i-2][j-2] == XO && board[i-3][j-3] == XO)
+                win = true;
 
-            if( board[i][ix] == XO     &&
-                board[i-1][ix-1] == XO &&
-                board[i-2][ix-2] == XO &&
-                board[i-3][ix-3] == XO )
-            {
-                win = 1;
-            }
+            if (board[i][j] == XO && board[i][j-1] == XO &&
+               board[i][j-2] == XO && board[i][j-3] == XO)
+                win = true;
 
+            if (board[i][j] == XO && board[i-1][j] == XO &&
+               board[i-2][j] == XO && board[i-3][j] == XO)
+                win = true;
 
-            if( board[i][ix] == XO   &&
-                board[i][ix-1] == XO &&
-                board[i][ix-2] == XO &&
-                board[i][ix-3] == XO )
-            {
-                win = 1;
-            }
+            if (board[i][j] == XO && board[i-1][j+1] == XO &&
+               board[i-2][j+2] == XO && board[i-3][j+3] == XO)
+                win = true;
 
-            if( board[i][ix] == XO   &&
-                board[i-1][ix] == XO &&
-                board[i-2][ix] == XO &&
-                board[i-3][ix] == XO )
-            {
-                win = 1;
-            }
-
-            if( board[i][ix] == XO     &&
-                board[i-1][ix+1] == XO &&
-                board[i-2][ix+2] == XO &&
-                board[i-3][ix+3] == XO )
-            {
-                win = 1;
-            }
-
-            if ( board[i][ix] == XO   &&
-                 board[i][ix+1] == XO &&
-                 board[i][ix+2] == XO &&
-                 board[i][ix+3] == XO )
-            {
-                win = 1;
-            }
+            if (board[i][j] == XO && board[i][j+1] == XO &&
+                board[i][j+2] == XO && board[i][j+3] == XO)
+                win = true;
         }
-
     }
-
     return win;
 }
 
-void Connect4::PlayerWin ( playerInfo activePlayer )
-{
-    cout << endl << activePlayer.playerName << " Connected Four, You Win!" << endl;
+void Connect4::playerWin(bool client) {
+    if (client) {
+        // do something
+    } else {
+        // do something else
+    }
 }
 
- */
  
 
  

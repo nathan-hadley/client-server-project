@@ -132,8 +132,6 @@ void RPCImpl::playConnect4RPC(vector<string>& arrayTokens)  {
     // TODO
     //Everything below is temporary
 
-
-
     auto* game = new Connect4();
 
     char szBuffer[50];

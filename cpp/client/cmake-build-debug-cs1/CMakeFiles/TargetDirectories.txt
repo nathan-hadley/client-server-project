@@ -1,3 +1,0 @@
-/home/st/pharvey/cpsc5042/Server/tmp/tmp.t5nz77p99t/cmake-build-debug-cs1/CMakeFiles/rebuild_cache.dir
-/home/st/pharvey/cpsc5042/Server/tmp/tmp.t5nz77p99t/cmake-build-debug-cs1/CMakeFiles/client.dir
-/home/st/pharvey/cpsc5042/Server/tmp/tmp.t5nz77p99t/cmake-build-debug-cs1/CMakeFiles/edit_cache.dir
