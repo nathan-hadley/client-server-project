@@ -2,10 +2,16 @@
 #include "Connect4.h"
 using namespace std;
 
+/**
+ * Constructor.
+ */
 Connect4::Connect4() {
     restart();
 }
 
+/**
+ * Clears board.
+ */
 void Connect4::restart() {
     for (int i = 0; i < 6; i++) {
         for (int j = 0; j < 7; j++) {
@@ -14,8 +20,12 @@ void Connect4::restart() {
     }
 }
 
-// assumes board is not full. Use fullBoard() to check.
-// client always 'X'
+/**
+ * Drops client piece onto board. Assumes board is not full. Use fullBoard() to
+ * check. Client is always 'X'.
+ * @param dropChoice: chosen column.
+ * @return true if drop successful, false if column is full.
+ */
 bool Connect4::clientDrop(int dropChoice) {
     if (board[0][dropChoice] != '*') {
         int i = 0;
@@ -28,8 +38,10 @@ bool Connect4::clientDrop(int dropChoice) {
     return false;
 }
 
-// assumes board is not full. Use fullBoard() to check.
-// computer always '0'
+/**
+ * Drops computer piece. Chooses a random column and assumes board is not full.
+ * Use fullBoard() to check. Computer is always 'O'.
+ */
 void Connect4::computerDrop() {
     srand(time(0));
     int dropChoice;
@@ -45,7 +57,10 @@ void Connect4::computerDrop() {
     board[i][dropChoice] = 'X';
 }
 
-// Checks for full board.
+/**
+ * Checks for full board.
+ * @return true if full, false otherwise.
+ */
 bool Connect4::fullBoard() {
     int full = 0;
     for (int i = 0; i < 7; i++ ) {
@@ -57,8 +72,11 @@ bool Connect4::fullBoard() {
     else return false;
 }
 
-
-// Checks for four-in-a-row
+/**
+ * Checks for four-in-a-row.
+ * @param client: true if checking for client, false if checking for computer.
+ * @return true if winner found.
+ */
 bool Connect4::checkFour(bool client) {
     char XO;
     bool win = false;
@@ -95,6 +113,10 @@ bool Connect4::checkFour(bool client) {
     return win;
 }
 
+/**
+ * TODO not sure if we'll need a function like this.
+ * @param client
+ */
 void Connect4::playerWin(bool client) {
     if (client) {
         // do something

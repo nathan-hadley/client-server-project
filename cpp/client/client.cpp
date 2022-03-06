@@ -1,4 +1,3 @@
-// Client side C/C++ program to demonstrate Socket programming
 #include <cstdio>
 #include <sys/socket.h>
 #include <arpa/inet.h>
@@ -15,6 +14,12 @@ bool ConnectToServer(const char* serverAddress, int port, int& sock);
 void sendRPC(const string& RPC, const int& sock, vector<string>& arrayTokens);
 void ParseTokens(char* buffer, vector<string>& a);
 
+/**
+ * TODO
+ * @param argc
+ * @param argv
+ * @return
+ */
 int main(int argc, char const* argv[]) {
     // Takes first command line argument: IP address of the server
     const char* serverAddress = argv[1];
@@ -139,15 +144,12 @@ int main(int argc, char const* argv[]) {
     return 0;
 }
 
-/*
- * ConnectToServer will connect to the Server based on command line
- *
- * Input:
- *      serverAddress: The IP address of the server.
- *      port: The port the server is listening on.
- *      sock (passed by reference): A variable that will be assigned the socket.
- * Output:
- *      Returns true if a connection to the server is successful, false otherwise.
+/**
+ * ConnectToServer will connect to the Server based on command line.
+ * @param serverAddress: The IP address of the server.
+ * @param port: The port the server is listening on.
+ * @param sock (passed by reference): A variable that will be assigned the socket.
+ * @return Returns true if a connection to the server is successful, false otherwise.
 */
 bool ConnectToServer(const char* serverAddress, int port, int& sock) {
     struct sockaddr_in serv_addr{};
@@ -169,17 +171,14 @@ bool ConnectToServer(const char* serverAddress, int port, int& sock) {
         printf("\nConnection Failed \n");
         return false;
     }
-
     return true;
 }
 
-/*
+/**
  * Sends RPC to server.
- *
- * Input:
- *      RPC: string RPC.
- *      sock: socket to send message on.
- *      arrayTokens (passed by reference): token array to write buffer to.
+ * @param RPC: string RPC.
+ * @param sock: socket to send message on.
+ * @param arrayTokens (passed by reference): token array to write buffer to.
  */
 void sendRPC(const string& RPC, const int& sock, vector<string>& arrayTokens) {
     // Array of characters created as buffer, which will be passed to server
@@ -202,13 +201,10 @@ void sendRPC(const string& RPC, const int& sock, vector<string>& arrayTokens) {
     ParseTokens(buffer, arrayTokens);
 }
 
-/*
- * ParseTokens splits a string by semicolons and adds all strings to the input
- * vector.
- *
- * Input:
- *      buffer: The string to be split
- *      a: The vector to have strings added to
+/**
+ * ParseTokens splits a string by semicolons and adds all strings to the input vector.
+ * @param buffer: The string to be split.
+ * @param a: The vector to have strings added to.
  */
 void ParseTokens(char* buffer, vector<string>& a) {
     char* token;

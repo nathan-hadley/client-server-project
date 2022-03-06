@@ -1,10 +1,11 @@
 #include <iostream>
-#include <string>
 #include "Connect4.h"
 using namespace std;
 
-// TODO game logic client side
-
+/**
+ * TODO
+ * @param board
+ */
 void Connect4::displayBoard(const string& board) {
     int rows = 6, columns = 7, i, ix;
 
@@ -19,6 +20,10 @@ void Connect4::displayBoard(const string& board) {
     cout << endl;
 }
 
+/**
+ * TODO
+ * @return
+ */
 string Connect4::getColumnChoice() {
     int columnChoice;
     do {
@@ -30,6 +35,11 @@ string Connect4::getColumnChoice() {
     return to_string(columnChoice);
 }
 
+/**
+ * TODO
+ * @param gameStatus
+ * @return
+ */
 bool Connect4::gameOver(int gameStatus) {
     switch (gameStatus) {
         case 9:
