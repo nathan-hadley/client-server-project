@@ -60,7 +60,6 @@ bool Connect4::gameOver(int gameStatus) {
     string input;
     printf("Enter \"y\" to play again. Enter anything else to exit. ");
     cin >> input;
-
     if (input == "y" || input == "Y")
         return true;
     else return false;
