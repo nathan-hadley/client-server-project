@@ -12,7 +12,7 @@
 
 
 using namespace std;
-extern int j;
+extern int totalGamesPlayed;
 extern pthread_mutex_t myMutex;
 
 RPCImpl::RPCImpl(int socket) {
@@ -81,7 +81,7 @@ void RPCImpl::ProcessRPC() {
             checkStatsRPC();
         } else if (bConnected && (aString == "disconnect")) {
             ProcessDisconnectRPC();
-            cout << "Total games played = " << j << endl;
+            //cout << "Total games played = " << totalGamesPlayed << endl;
             printf("Disconnected from client.\n\n");
             bContinue = false; // We are going to leave this loop
         } else {
@@ -149,7 +149,7 @@ void RPCImpl::playConnect4RPC(vector<string>& arrayTokens)  {
     // number is displayed in ProcessRPC, right after token disconnect is received
     pthread_mutex_lock(&myMutex);
     //increment
-    j++;
+    totalGamesPlayed++;
     pthread_mutex_unlock(&myMutex);
     //end Mutex code
 
@@ -169,6 +169,17 @@ void RPCImpl::playPieceRPC(vector<string>& arrayTokens) const {
 }
 void RPCImpl::checkStatsRPC() const {
     // TODO
+    string s = to_string(totalGamesPlayed);
+    char const *pchar = s.append(";").c_str();
+
+    char szBuffer[16];
+    strcpy(szBuffer, pchar);
+
+    // Send Response back on our socket
+    int nlen = (int) strlen(szBuffer);
+    szBuffer[nlen] = 0;
+    send(this->m_socket, szBuffer, (int) strlen(szBuffer) + 1, 0);
+
 }
 
 /*

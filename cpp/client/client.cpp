@@ -104,7 +104,18 @@ int main(int argc, char const* argv[]) {
         game->displayBoard(arrayTokens[0]);
 
         continuePlaying = game->gameOver(gameStatus);
+
     }
+
+    // checkStatsRPC section
+    // currently it displays the total games from all clients
+    // still need work to display the total games by that particular client
+    int gamesPlayed;
+    string checkStatsRPC;
+    checkStatsRPC.append("checkstats;");
+    sendRPC(checkStatsRPC, sock, arrayTokens);
+    gamesPlayed = stoi(arrayTokens[0]);
+    cout << "Total number games played: " << gamesPlayed << endl;
 
     // Do a disconnect Message
     if (bConnect) {

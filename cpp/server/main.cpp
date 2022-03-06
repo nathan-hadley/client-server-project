@@ -14,7 +14,7 @@
 #include <pthread.h>
 using namespace std;
 
-int j;
+int totalGamesPlayed;
 pthread_mutex_t  myMutex;
 // Main function for the server.
 int main(int argc, char const* argv[]) {
