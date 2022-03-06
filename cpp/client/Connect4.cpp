@@ -1,12 +1,13 @@
 #include <iostream>
 #include "Connect4.h"
+
 using namespace std;
 
 /**
  * TODO
  * @param board
  */
-void Connect4::displayBoard(const string& board) {
+void Connect4::displayBoard(const string &board) {
     int rows = 6, columns = 7, i, ix;
 
     cout << endl;
@@ -14,7 +15,7 @@ void Connect4::displayBoard(const string& board) {
 
     for (i = 1; i <= rows; i++) {
         cout << "\t|";
-        cout << board.substr((i-1)*rows,columns);
+        cout << board.substr((i - 1) * rows, columns);
         cout << "|" << endl;
     }
     cout << endl;
@@ -60,7 +61,7 @@ bool Connect4::gameOver(int gameStatus) {
     printf("Enter \"y\" to play again. Enter anything else to exit. ");
     cin >> input;
 
-    if (input == "y")
+    if (input == "y" || input == "Y")
         return true;
     else return false;
 }
