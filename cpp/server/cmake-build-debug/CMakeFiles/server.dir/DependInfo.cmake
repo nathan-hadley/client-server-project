@@ -8,11 +8,11 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/tmp/tmp.6TbLCN1Y3N/Connect4.cpp" "/tmp/tmp.6TbLCN1Y3N/cmake-build-debug/CMakeFiles/server.dir/Connect4.cpp.o"
-  "/tmp/tmp.6TbLCN1Y3N/RPCServer.cpp" "/tmp/tmp.6TbLCN1Y3N/cmake-build-debug/CMakeFiles/server.dir/RPCServer.cpp.o"
-  "/tmp/tmp.6TbLCN1Y3N/main.cpp" "/tmp/tmp.6TbLCN1Y3N/cmake-build-debug/CMakeFiles/server.dir/main.cpp.o"
+  "/Users/FelixMinhVu/Documents/GitHub/client-server-project/cpp/server/Connect4.cpp" "/Users/FelixMinhVu/Documents/GitHub/client-server-project/cpp/server/cmake-build-debug/CMakeFiles/server.dir/Connect4.cpp.o"
+  "/Users/FelixMinhVu/Documents/GitHub/client-server-project/cpp/server/RPCServer.cpp" "/Users/FelixMinhVu/Documents/GitHub/client-server-project/cpp/server/cmake-build-debug/CMakeFiles/server.dir/RPCServer.cpp.o"
+  "/Users/FelixMinhVu/Documents/GitHub/client-server-project/cpp/server/main.cpp" "/Users/FelixMinhVu/Documents/GitHub/client-server-project/cpp/server/cmake-build-debug/CMakeFiles/server.dir/main.cpp.o"
   )
-set(CMAKE_CXX_COMPILER_ID "GNU")
+set(CMAKE_CXX_COMPILER_ID "AppleClang")
 
 # The include file search paths:
 set(CMAKE_CXX_TARGET_INCLUDE_PATH
