@@ -169,7 +169,7 @@ bool ConnectToServer(const char* serverAddress, int port, int& sock) {
 
     // If connection failed, it might be the server is not running
     if (connect(sock, (struct sockaddr*)&serv_addr, sizeof(serv_addr)) < 0) {
-        printf("\nConnection Failed! Check if the server if running. \n");
+        printf("\nConnection Failed! Check if the server is running. \n");
         return false;
     }
     return true;
