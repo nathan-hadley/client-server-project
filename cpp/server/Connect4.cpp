@@ -101,7 +101,7 @@ bool Connect4::checkFour(bool client) {
     if (client)
         XO = 'X';
     else
-        XO = '0';
+        XO = 'O';
 
     for (int i = 6; i >= 0; i--) {
         for (int j = 7; j >= 0; j--) {
