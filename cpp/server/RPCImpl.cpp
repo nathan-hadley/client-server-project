@@ -3,6 +3,7 @@
 #include <cstring>
 #include "RPCImpl.h"
 #include "Connect4.h"
+#include <iostream>
 
 using namespace std;
 extern int totalGamesPlayed;
@@ -164,8 +165,10 @@ void RPCImpl::playPieceRPC(Connect4* game, vector<string>& arrayTokens) const {
     int response;
 
     // If column is full.
-    if (!game->clientDrop(columnChoice-1))
+    if (!game->clientDrop(columnChoice-1)) {
         response = 8;
+    }
+
     else {
         // Check if client wins.
         if (game->checkFour(true))

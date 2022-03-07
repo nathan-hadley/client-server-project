@@ -13,7 +13,7 @@ public:
     string boardToString();
 
 private:
-    char board[7][6];
+    char board[6][7];
 
     void restart();
 };
