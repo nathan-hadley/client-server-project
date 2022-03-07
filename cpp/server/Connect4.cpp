@@ -60,7 +60,7 @@ int Connect4::computerDrop() {
     }
     board[i][dropChoice] = 'O';
 
-    return dropChoice;
+    return dropChoice + 1;
 }
 
 /**
