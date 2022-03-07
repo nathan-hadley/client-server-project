@@ -13,13 +13,15 @@ void Connect4::displayBoard(const string &board) {
     cout << endl;
     cout << "Connect Four Game Board" << endl;
 
+
     for (int i = rows - 1; i >= 0; i--) {
         cout << "\t|";
-        cout << board.substr((i * columns), columns);
+        cout << board.substr(0, columns);
         cout << "|" << endl;
     }
     cout << endl;
 }
+
 
 /**
  * TODO

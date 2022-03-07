@@ -7,6 +7,7 @@ using namespace std;
 class Connect4 {
 public:
     static void displayBoard(const string& board);
+    //static void displayBoard(char board[][10]);
     static string getColumnChoice();
     static bool gameOver(int gameStatus);
 };
