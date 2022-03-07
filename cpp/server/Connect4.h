@@ -16,7 +16,6 @@ private:
     char board[7][6];
 
     void restart();
-    void playerWin (bool client);
 };
 
 #endif //SERVER_CONNECT4_H
