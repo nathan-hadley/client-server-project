@@ -12,6 +12,7 @@ public:
     void processRPC();
 private:
     int m_socket;
+    Connect4 *game = new Connect4();
 
     static void parseTokens(char* buffer, vector<string>& a);
     void sendResponse(char* buffer) const;

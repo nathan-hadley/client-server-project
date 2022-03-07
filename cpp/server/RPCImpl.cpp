@@ -50,7 +50,6 @@ void RPCImpl::processRPC() {
     bool bConnected = false;
     bool bContinue = true;
     bool playingGame = false;
-    Connect4* game;
 
     while (bContinue) {
         // Should be blocked when a new RPC has not called us yet
@@ -134,7 +133,7 @@ Connect4* RPCImpl::playConnect4RPC(vector<string>& arrayTokens)  {
     const int TURN_TOKEN = 1;
     int firstTurn = stoi(arrayTokens[TURN_TOKEN]);
 
-    auto* game = new Connect4();    // Initialize new game.
+    game->restart();    // Initialize new game.
 
     // Check if computer goes first.
     if (firstTurn == 2)

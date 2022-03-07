@@ -6,6 +6,7 @@ using namespace std;
 class Connect4 {
 public:
     Connect4();
+    void restart();
     string getBoardString();
     bool clientDrop(int dropChoice);
     int computerDrop();
@@ -13,10 +14,9 @@ public:
     bool checkFour(bool client);
 
 private:
-    string* boardString;
-    char board[6][7];
+    string* boardString{};
+    char board[6][7]{};
 
-    void restart();
     void boardToString();
     void stringToBoard();
 };

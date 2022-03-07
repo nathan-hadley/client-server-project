@@ -61,7 +61,6 @@ int main(int argc, char const *argv[]) {
     // PlayConnect4RPC Section
     bool continuePlaying = true;
     while (continuePlaying && bConnect) {
-        auto *game = new Connect4();
 
         int turnChoice;
         do {
