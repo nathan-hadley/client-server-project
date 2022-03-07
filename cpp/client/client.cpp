@@ -71,7 +71,7 @@ int main(int argc, char const *argv[]) {
 
         // Create string to send to server. Ex.: playconnectfour;"
         string playConnect4RPC;
-        playConnect4RPC.append("playconnect4;").append(to_string(turnChoice));
+        playConnect4RPC.append("playconnect4;").append(to_string(turnChoice).append(";"));
 
         sendRPC(playConnect4RPC, sock, arrayTokens);
 

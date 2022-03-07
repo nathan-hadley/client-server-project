@@ -72,16 +72,15 @@ void RPCImpl::processRPC() {
 
         if (!bConnected && (strRPC == "connect")) {
             bConnected = processConnectRPC(arrayTokens);
-        } else if (bConnected && strRPC == "playconnect4") {
+        } else if (bConnected && (strRPC == "playconnect4")) {
             game = playConnect4RPC(arrayTokens);
             playingGame = true;
-        } else if (bConnected && playingGame && strRPC == "playpiece") {
+        } else if (bConnected && playingGame && (strRPC == "playpiece")) {
             playPieceRPC(game, arrayTokens);
-        } else if (bConnected && strRPC == "checkstats") {
+        } else if (bConnected && (strRPC == "checkstats")) {
             checkStatsRPC();
         } else if (bConnected && (strRPC == "disconnect")) {
             processDisconnectRPC();
-            //cout << "Total games played = " << totalGamesPlayed << endl;
             printf("Disconnected from client.\n\n");
             bContinue = false; // We are going to leave this loop
         } else {
@@ -120,9 +119,7 @@ bool RPCImpl::processConnectRPC(vector<string>& arrayTokens) const {
     }
 
     // Send Response back on our socket
-    int nlen = (int) strlen(szBuffer);
-    szBuffer[nlen] = 0;
-    send(this->m_socket, szBuffer, (int) strlen(szBuffer) + 1, 0);
+    sendResponse(szBuffer);
 
     if (validLogin) return true;
     else return false;
@@ -142,7 +139,7 @@ Connect4* RPCImpl::playConnect4RPC(vector<string>& arrayTokens)  {
     // Convert board array to string to send back on socket.
     string strBoard = game->getBoardString().append(";");
 
-    char szBuffer[50];
+    char szBuffer[100];
     strcpy(szBuffer, strBoard.c_str());
 
     // Send response back on our socket.

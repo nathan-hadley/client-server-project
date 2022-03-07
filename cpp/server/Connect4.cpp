@@ -12,7 +12,7 @@ Connect4::Connect4() {
 }
 
 string Connect4::getBoardString() {
-    return *boardString;
+    return boardToString();
 }
 
 /**
@@ -89,15 +89,25 @@ bool Connect4::fullBoard() {
     else return false;
 }
 
-void Connect4::boardToString() {
-    stringstream ss;
+string Connect4::boardToString() {
+    string result;
     for (int i = 0; i <= 6; i++) {
         for (int j = 0; j <= 7; j++) {
-            ss << j;
+             result += board[i][j];
         }
     }
-    *boardString = ss.str();
+    return result;
 }
+
+//void Connect4::boardToString() {
+//    stringstream ss;
+//    for (int i = 0; i <= 6; i++) {
+//        for (int j = 0; j <= 7; j++) {
+//            ss << to_string(board[i][j]);
+//        }
+//    }
+//    *boardString = ss.str();
+//}
 
 void Connect4::stringToBoard() {
     int count = 0;

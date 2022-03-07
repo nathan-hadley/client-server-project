@@ -7,7 +7,7 @@ using namespace std;
  * TODO
  * @param board
  */
-void Connect4::displayBoard(const string &board) {
+void Connect4::displayBoard(const string& board) {
     int rows = 6, columns = 7;
 
     cout << endl;

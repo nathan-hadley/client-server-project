@@ -15,9 +15,10 @@ public:
 
 private:
     string* boardString;
-    char board[6][7];
+    char board[6][7]{};
 
-    void boardToString();
+    string boardToString();
+    //void boardToString();
     void stringToBoard();
 };
 
