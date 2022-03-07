@@ -84,6 +84,7 @@ int main(int argc, char const *argv[]) {
         // 11: Board is full
         int gameStatus;
         do {
+            cout << "Board: " << arrayTokens[0] << endl;
             Connect4::displayBoard(arrayTokens[0]);
             string columnChoice = Connect4::getColumnChoice();
 
@@ -93,6 +94,7 @@ int main(int argc, char const *argv[]) {
 
             sendRPC(playPieceRPC, sock, arrayTokens);
 
+            cout << "Game status: " << arrayTokens[1] << endl;
             gameStatus = stoi(arrayTokens[1]);
 
             if (gameStatus == 8)
@@ -102,6 +104,7 @@ int main(int argc, char const *argv[]) {
 
         } while (gameStatus >= 1 && gameStatus <= 8);
 
+        cout << "Board: " << arrayTokens[0] << endl;
         Connect4::displayBoard(arrayTokens[0]);
 
         continuePlaying = Connect4::gameOver(gameStatus);
