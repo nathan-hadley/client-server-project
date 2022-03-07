@@ -129,7 +129,17 @@ bool RPCImpl::processConnectRPC(vector<string>& arrayTokens) const {
 }
 
 Connect4* RPCImpl::playConnect4RPC(vector<string>& arrayTokens)  {
-    auto* game = new Connect4();
+    // Get first turn token
+    const int TURN_TOKEN = 1;
+    int firstTurn = stoi(arrayTokens[TURN_TOKEN]);
+
+    auto* game = new Connect4();    // Initialize new game.
+
+    // Check if computer goes first.
+    if (firstTurn == 2)
+        game->computerDrop();
+
+    // Convert board array to string to send back on socket.
     string strBoard = game->boardToString().append(";");
 
     char szBuffer[50];
@@ -143,26 +153,59 @@ Connect4* RPCImpl::playConnect4RPC(vector<string>& arrayTokens)  {
     totalGamesPlayed++;
     pthread_mutex_unlock(&myMutex);
 
-    // TODO add ability for player to choose if computer or player takes first turn
+    return game;
 }
 
 void RPCImpl::playPieceRPC(Connect4* game, vector<string>& arrayTokens) const {
-    // TODO
-    //Everything below is temporary
+    // Get column choice token
+    const int COLUMN_TOKEN = 1;
+    int columnChoice = stoi(arrayTokens[COLUMN_TOKEN]);
+
+    bool clientWin = false;
+    bool computerWin = false;
+    bool fullBoard = false;
+
+    int response;
+
+    // If column is full.
+    if (!game->clientDrop(columnChoice))
+        response = 8;
+    else {
+        // Check if client wins.
+        clientWin = game->checkFour(true);
+        if (clientWin)
+            // If client wins
+            response = 9;
+        else if (game->fullBoard())
+            // If board is full.
+            response = 11;
+        else {
+            // Computer moves. Save move to response.
+            response = game->computerDrop();
+            // Check if computer wins.
+            if (game->checkFour(false))
+                response = 10;
+        }
+    }
+
+    // Convert board array to string to send back on socket.
+    string strBoard = game->boardToString().append(";");
+
+    // Add response to board.
+    strBoard.append(to_string(response)).append(";");
+
     char szBuffer[50];
-    strcpy(szBuffer, "******************************************;9;");
+    strcpy(szBuffer, strBoard.c_str());
 
     // Send response back on our socket
     sendResponse(szBuffer);
 }
 
 void RPCImpl::checkStatsRPC() const {
-    // TODO
-    string s = to_string(totalGamesPlayed);
-    char const *pchar = s.append(";").c_str();
+    string totalGames = to_string(totalGamesPlayed).append(";");
 
     char szBuffer[16];
-    strcpy(szBuffer, pchar);
+    strcpy(szBuffer, totalGames.c_str());
 
     // Send response back on our socket
     sendResponse(szBuffer);

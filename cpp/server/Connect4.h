@@ -7,7 +7,7 @@ class Connect4 {
 public:
     Connect4();
     bool clientDrop(int dropChoice);
-    void computerDrop();
+    int computerDrop();
     bool fullBoard();
     bool checkFour(bool client);
     string boardToString();

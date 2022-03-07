@@ -42,8 +42,9 @@ bool Connect4::clientDrop(int dropChoice) {
 /**
  * Drops computer piece. Chooses a random column and assumes board is not full.
  * Use fullBoard() to check. Computer is always 'O'.
+ * @return column choice.
  */
-void Connect4::computerDrop() {
+int Connect4::computerDrop() {
     srand(time(0));
     int dropChoice;
 
@@ -56,6 +57,8 @@ void Connect4::computerDrop() {
         i++;
     }
     board[i][dropChoice] = 'X';
+
+    return dropChoice;
 }
 
 /**

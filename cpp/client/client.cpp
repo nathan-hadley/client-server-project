@@ -12,9 +12,7 @@
 using namespace std;
 
 bool ConnectToServer(const char *serverAddress, int port, int &sock);
-
 void sendRPC(const string &RPC, const int &sock, vector<string> &arrayTokens);
-
 void ParseTokens(char *buffer, vector<string> &a);
 
 /**
@@ -55,8 +53,7 @@ int main(int argc, char const *argv[]) {
         // Authenticate login
         if (stoi(arrayTokens[0]) == 1) {
             validLogin = true;
-            printf("Login successful.\n");
-            cout << "Welcome to Connect Four!" << endl;
+            printf("Login successful.\n\nWelcome to Connect Four!\n");
         } else
             printf("Invalid username and/or password.\n");
     }
@@ -68,16 +65,16 @@ int main(int argc, char const *argv[]) {
     while (continuePlaying && bConnect) {
         auto *game = new Connect4();
 
-        string turnChoice;
-        while (turnChoice != "1" && turnChoice != "2") {
-            cout << "To start a new game, enter \"1\" to take the first turn, "
-                    "or enter \"2\" for the computer to take the first turn: ";
+        int turnChoice;
+        do {
+            cout << "\nEnter 1 to take the first turn, or enter 2 for the "
+                    "computer to take the first turn: ";
             cin >> turnChoice;
-        }
+        } while (turnChoice != 1 && turnChoice != 2);
 
         // Create string to send to server. Ex.: playconnectfour;"
         string playConnect4RPC;
-        playConnect4RPC.append("playconnect4;").append(turnChoice);
+        playConnect4RPC.append("playconnect4;").append(to_string(turnChoice));
 
         sendRPC(playConnect4RPC, sock, arrayTokens);
 
@@ -88,6 +85,7 @@ int main(int argc, char const *argv[]) {
         // 8: Player has selected a column that is full
         // 9: Player has won
         // 10: Computer has won
+        // 11: Board is full
         int gameStatus;
         do {
             Connect4::displayBoard(arrayTokens[0]);
@@ -103,17 +101,14 @@ int main(int argc, char const *argv[]) {
 
             if (gameStatus == 8)
                 printf("You selected a column that is full. Please try again");
-            else if (gameStatus >= 1 && gameStatus <= 8) {
-                cout << "The computer has selected column " << gameStatus << "."
-                     << endl;
-            }
+            else if (gameStatus >= 1 && gameStatus <= 7)
+                cout << "The computer has selected column " << gameStatus << ".\n";
 
         } while (gameStatus >= 1 && gameStatus <= 8);
 
         Connect4::displayBoard(arrayTokens[0]);
 
         continuePlaying = Connect4::gameOver(gameStatus);
-
     }
 
     // checkStatsRPC section
