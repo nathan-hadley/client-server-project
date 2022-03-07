@@ -104,24 +104,29 @@ bool Connect4::checkFour(bool client) {
         for (int j = 7; j >= 0; j--) {
 
             if (board[i][j] == XO && board[i-1][j-1] == XO &&
-               board[i-2][j-2] == XO && board[i-3][j-3] == XO)
+               board[i-2][j-2] == XO && board[i-3][j-3] == XO) {
                 win = true;
+            }
 
             if (board[i][j] == XO && board[i][j-1] == XO &&
-               board[i][j-2] == XO && board[i][j-3] == XO)
+               board[i][j-2] == XO && board[i][j-3] == XO) {
                 win = true;
+            }
 
             if (board[i][j] == XO && board[i-1][j] == XO &&
-               board[i-2][j] == XO && board[i-3][j] == XO)
+               board[i-2][j] == XO && board[i-3][j] == XO) {
                 win = true;
+            }
 
             if (board[i][j] == XO && board[i-1][j+1] == XO &&
-               board[i-2][j+2] == XO && board[i-3][j+3] == XO)
+               board[i-2][j+2] == XO && board[i-3][j+3] == XO) {
                 win = true;
+            }
 
             if (board[i][j] == XO && board[i][j+1] == XO &&
-                board[i][j+2] == XO && board[i][j+3] == XO)
+                board[i][j+2] == XO && board[i][j+3] == XO) {
                 win = true;
+            }
         }
     }
     return win;

@@ -161,10 +161,6 @@ void RPCImpl::playPieceRPC(Connect4* game, vector<string>& arrayTokens) const {
     const int COLUMN_TOKEN = 1;
     int columnChoice = stoi(arrayTokens[COLUMN_TOKEN]);
 
-    bool clientWin = false;
-    bool computerWin = false;
-    bool fullBoard = false;
-
     int response;
 
     // If column is full.
@@ -172,8 +168,7 @@ void RPCImpl::playPieceRPC(Connect4* game, vector<string>& arrayTokens) const {
         response = 8;
     else {
         // Check if client wins.
-        clientWin = game->checkFour(true);
-        if (clientWin)
+        if (game->checkFour(true))
             // If client wins
             response = 9;
         else if (game->fullBoard())

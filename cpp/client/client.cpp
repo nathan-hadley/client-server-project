@@ -59,8 +59,6 @@ int main(int argc, char const *argv[]) {
     }
 
     // PlayConnect4RPC Section
-    // Needs to be cleaned up and have ability for player to choose if computer
-    // or player takes first turn
     bool continuePlaying = true;
     while (continuePlaying && bConnect) {
         auto *game = new Connect4();
@@ -79,8 +77,7 @@ int main(int argc, char const *argv[]) {
         sendRPC(playConnect4RPC, sock, arrayTokens);
 
         // PlayPieceRPC Section
-        // gameStatus will be what is returned from the server after the RPC
-        // call. I think the following might make sense:
+        // gameStatus will be what is returned from the server after the RPC call.
         // 1-7: The computer's column choice returned from the RPC call
         // 8: Player has selected a column that is full
         // 9: Player has won
