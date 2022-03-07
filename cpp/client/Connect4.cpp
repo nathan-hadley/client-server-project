@@ -13,9 +13,9 @@ void Connect4::displayBoard(const string &board) {
     cout << endl;
     cout << "Connect Four Game Board" << endl;
 
-    for (int i = 1; i <= rows; i++) {
+    for (int i = rows - 1; i >= 0; i--) {
         cout << "\t|";
-        cout << board.substr((i - 1) * rows, columns);
+        cout << board.substr((i * columns), columns);
         cout << "|" << endl;
     }
     cout << endl;

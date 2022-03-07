@@ -29,11 +29,11 @@ void Connect4::restart() {
  * @return true if drop successful, false if column is full.
  */
 bool Connect4::clientDrop(int dropChoice) {
-    if (board[0][dropChoice] == '*') {
+    if (board[5][dropChoice] == '*') {
         // Start at bottom of column and check for first empty slot
-        int i = 5;
+        int i = 0;
         while (board[i][dropChoice] != '*') {
-            i--;
+            i++;
         }
         board[i][dropChoice] = 'X';
         return true;
@@ -60,7 +60,7 @@ int Connect4::computerDrop() {
     }
     board[i][dropChoice] = 'O';
 
-    return dropChoice;
+    return dropChoice + 1;
 }
 
 /**
