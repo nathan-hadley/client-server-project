@@ -8,12 +8,12 @@ using namespace std;
  * @param board
  */
 void Connect4::displayBoard(const string &board) {
-    int rows = 6, columns = 7, i, ix;
+    int rows = 6, columns = 7;
 
     cout << endl;
     cout << "Connect Four Game Board" << endl;
 
-    for (i = 1; i <= rows; i++) {
+    for (int i = 1; i <= rows; i++) {
         cout << "\t|";
         cout << board.substr((i - 1) * rows, columns);
         cout << "|" << endl;
