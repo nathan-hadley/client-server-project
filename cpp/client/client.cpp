@@ -8,11 +8,14 @@
 #include <iostream>
 #include <random>
 #include "Connect4.h"
+
 using namespace std;
 
-bool ConnectToServer(const char* serverAddress, int port, int& sock);
-void sendRPC(const string& RPC, const int& sock, vector<string>& arrayTokens);
-void ParseTokens(char* buffer, vector<string>& a);
+bool ConnectToServer(const char *serverAddress, int port, int &sock);
+
+void sendRPC(const string &RPC, const int &sock, vector<string> &arrayTokens);
+
+void ParseTokens(char *buffer, vector<string> &a);
 
 /**
  * TODO
@@ -20,9 +23,9 @@ void ParseTokens(char* buffer, vector<string>& a);
  * @param argv
  * @return
  */
-int main(int argc, char const* argv[]) {
+int main(int argc, char const *argv[]) {
     // Takes first command line argument: IP address of the server
-    const char* serverAddress = argv[1];
+    const char *serverAddress = argv[1];
     // Takes second command line argument: port the server is listening on
     const int port = atoi(argv[2]);
 
@@ -34,8 +37,8 @@ int main(int argc, char const* argv[]) {
     bool validLogin = false;
     while (bConnect && !validLogin) {
         string username,
-        password,
-        connectRPC;
+                password,
+                connectRPC;
 
         // Collect username and password
         cout << "\nEnter your username: ";
@@ -63,9 +66,9 @@ int main(int argc, char const* argv[]) {
     // or player takes first turn
     bool continuePlaying = true;
     while (continuePlaying && bConnect) {
-        auto* game = new Connect4();
+        auto *game = new Connect4();
 
-        string turnChoice = "";
+        string turnChoice;
         while (turnChoice != "1" && turnChoice != "2") {
             cout << "To start a new game, enter \"1\" to take the first turn, "
                     "or enter \"2\" for the computer to take the first turn: ";
@@ -87,8 +90,8 @@ int main(int argc, char const* argv[]) {
         // 10: Computer has won
         int gameStatus;
         do {
-            game->displayBoard(arrayTokens[0]);
-            string columnChoice = game->getColumnChoice();
+            Connect4::displayBoard(arrayTokens[0]);
+            string columnChoice = Connect4::getColumnChoice();
 
             // Create string to send to server.
             string playPieceRPC;
@@ -101,14 +104,15 @@ int main(int argc, char const* argv[]) {
             if (gameStatus == 8)
                 printf("You selected a column that is full. Please try again");
             else if (gameStatus >= 1 && gameStatus <= 8) {
-                cout << "The computer has selected column " << gameStatus << "." << endl;
+                cout << "The computer has selected column " << gameStatus << "."
+                     << endl;
             }
 
         } while (gameStatus >= 1 && gameStatus <= 8);
 
-        game->displayBoard(arrayTokens[0]);
+        Connect4::displayBoard(arrayTokens[0]);
 
-        continuePlaying = game->gameOver(gameStatus);
+        continuePlaying = Connect4::gameOver(gameStatus);
 
     }
 
@@ -124,14 +128,14 @@ int main(int argc, char const* argv[]) {
 
     // Do a disconnect Message
     if (bConnect) {
-        
+
         string exit;
         while (exit != "EXIT") {
             cout << "Type 'EXIT' to disconnect" << endl;
             cin >> exit;
         }
 
-        const char* disconnectRPC = "disconnect;";
+        const char *disconnectRPC = "disconnect;";
         sendRPC(disconnectRPC, sock, arrayTokens);
 
     } else {
@@ -151,7 +155,7 @@ int main(int argc, char const* argv[]) {
  * @param sock (passed by reference): A variable that will be assigned the socket.
  * @return Returns true if a connection to the server is successful, false otherwise.
 */
-bool ConnectToServer(const char* serverAddress, int port, int& sock) {
+bool ConnectToServer(const char *serverAddress, int port, int &sock) {
     struct sockaddr_in serv_addr{};
     if ((sock = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
         printf("\n Socket creation error \n");
@@ -167,8 +171,9 @@ bool ConnectToServer(const char* serverAddress, int port, int& sock) {
         return false;
     }
 
-    if (connect(sock, (struct sockaddr*)&serv_addr, sizeof(serv_addr)) < 0) {
-        printf("\nConnection Failed \n");
+    // If connection failed, it might be the server is not running
+    if (connect(sock, (struct sockaddr *) &serv_addr, sizeof(serv_addr)) < 0) {
+        printf("\nConnection Failed! Check if the server is running. \n");
         return false;
     }
     return true;
@@ -180,9 +185,9 @@ bool ConnectToServer(const char* serverAddress, int port, int& sock) {
  * @param sock: socket to send message on.
  * @param arrayTokens (passed by reference): token array to write buffer to.
  */
-void sendRPC(const string& RPC, const int& sock, vector<string>& arrayTokens) {
+void sendRPC(const string &RPC, const int &sock, vector<string> &arrayTokens) {
     // Array of characters created as buffer, which will be passed to server
-    char buffer[1024] = { 0 };
+    char buffer[1024] = {0};
     int nlen;
 
     // Copies the characters from connectRPC to the buffer array
@@ -206,9 +211,9 @@ void sendRPC(const string& RPC, const int& sock, vector<string>& arrayTokens) {
  * @param buffer: The string to be split.
  * @param a: The vector to have strings added to.
  */
-void ParseTokens(char* buffer, vector<string>& a) {
-    char* token;
-    char* rest = (char*)buffer;
+void ParseTokens(char *buffer, vector<string> &a) {
+    char *token;
+    char *rest = (char *) buffer;
 
     while ((token = strtok_r(rest, ";", &rest))) {
         a.emplace_back(token);
