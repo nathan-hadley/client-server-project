@@ -186,7 +186,7 @@ void RPCImpl::playPieceRPC(Connect4* game, vector<string>& arrayTokens) const {
     // Convert board array to string to send back on socket.
     string strBoard = game->boardToString().append(";");
 
-    // Add response to board.
+    // Append response to board.
     strBoard.append(to_string(response)).append(";");
 
     char szBuffer[50];

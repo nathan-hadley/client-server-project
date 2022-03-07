@@ -1,5 +1,6 @@
 #include <string>
 #include <sstream>
+#include <iostream>
 #include "Connect4.h"
 using namespace std;
 
@@ -28,10 +29,11 @@ void Connect4::restart() {
  * @return true if drop successful, false if column is full.
  */
 bool Connect4::clientDrop(int dropChoice) {
-    if (board[0][dropChoice] != '*') {
-        int i = 0;
+    if (board[0][dropChoice] == '*') {
+        // Start at bottom of column and check for first empty slot
+        int i = 5;
         while (board[i][dropChoice] != '*') {
-            i++;
+            i--;
         }
         board[i][dropChoice] = 'X';
         return true;
@@ -56,7 +58,7 @@ int Connect4::computerDrop() {
     while (board[i][dropChoice] != '*') {
         i++;
     }
-    board[i][dropChoice] = 'X';
+    board[i][dropChoice] = 'O';
 
     return dropChoice;
 }
@@ -83,6 +85,7 @@ string Connect4::boardToString() {
             ss << board[i][j];
         }
     }
+    cout << ss.str() << endl;
     return ss.str();
 }
 
@@ -104,44 +107,27 @@ bool Connect4::checkFour(bool client) {
         for (int j = 7; j >= 0; j--) {
 
             if (board[i][j] == XO && board[i-1][j-1] == XO &&
-               board[i-2][j-2] == XO && board[i-3][j-3] == XO) {
+               board[i-2][j-2] == XO && board[i-3][j-3] == XO)
                 win = true;
-            }
 
             if (board[i][j] == XO && board[i][j-1] == XO &&
-               board[i][j-2] == XO && board[i][j-3] == XO) {
+               board[i][j-2] == XO && board[i][j-3] == XO)
                 win = true;
-            }
 
             if (board[i][j] == XO && board[i-1][j] == XO &&
-               board[i-2][j] == XO && board[i-3][j] == XO) {
+               board[i-2][j] == XO && board[i-3][j] == XO)
                 win = true;
-            }
 
             if (board[i][j] == XO && board[i-1][j+1] == XO &&
-               board[i-2][j+2] == XO && board[i-3][j+3] == XO) {
+               board[i-2][j+2] == XO && board[i-3][j+3] == XO)
                 win = true;
-            }
 
             if (board[i][j] == XO && board[i][j+1] == XO &&
-                board[i][j+2] == XO && board[i][j+3] == XO) {
+                board[i][j+2] == XO && board[i][j+3] == XO)
                 win = true;
-            }
         }
     }
     return win;
-}
-
-/**
- * TODO not sure if we'll need a function like this.
- * @param client
- */
-void Connect4::playerWin(bool client) {
-    if (client) {
-        // do something
-    } else {
-        // do something else
-    }
 }
 
  
