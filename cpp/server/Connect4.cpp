@@ -11,6 +11,10 @@ Connect4::Connect4() {
     restart();
 }
 
+string Connect4::getBoardString() {
+    return *boardString;
+}
+
 /**
  * Clears board.
  */
@@ -29,13 +33,16 @@ void Connect4::restart() {
  * @return true if drop successful, false if column is full.
  */
 bool Connect4::clientDrop(int dropChoice) {
+
+    stringToBoard();
     if (board[5][dropChoice] == '*') {
         // Start at bottom of column and check for first empty slot
-        int i = 0;
+        int i = 5;
         while (board[i][dropChoice] != '*') {
-            i++;
+            i--;
         }
         board[i][dropChoice] = 'X';
+        boardToString();
         return true;
     }
     return false;
@@ -50,15 +57,19 @@ int Connect4::computerDrop() {
     srand(time(0));
     int dropChoice;
 
+    // Get most up-to-date board.
+    stringToBoard();
     do {
         dropChoice = rand() % 7;
     } while (board[0][dropChoice] != '*');
 
-    int i = 0;
+    int i = 5;
     while (board[i][dropChoice] != '*') {
-        i++;
+        i--;
     }
     board[i][dropChoice] = 'O';
+    // Convert board back to string.
+    boardToString();
 
     return dropChoice + 1;
 }
@@ -69,7 +80,7 @@ int Connect4::computerDrop() {
  */
 bool Connect4::fullBoard() {
     int full = 0;
-    for (int i = 0; i < 7; i++ ) {
+    for (int i = 0; i <= 6; i++) {
         if (board[0][i] != '*' )
             full++;
     }
@@ -78,15 +89,24 @@ bool Connect4::fullBoard() {
     else return false;
 }
 
-string Connect4::boardToString() {
+void Connect4::boardToString() {
     stringstream ss;
-    for (int i = 0; i < 6; i++) {
-        for (int j = 0; j < 7; j++) {
-            ss << board[i][j];
+    for (int i = 0; i <= 6; i++) {
+        for (int j = 0; j <= 7; j++) {
+            ss << j;
         }
     }
-    cout << ss.str() << endl;
-    return ss.str();
+    *boardString = ss.str();
+}
+
+void Connect4::stringToBoard() {
+    int count = 0;
+    for (int i = 0; i <= 6; i++) {
+        for (int j = 0; j <= 7; j++) {
+            board[i][j] = boardString->at(count);
+            count++;
+        }
+    }
 }
 
 /**
