@@ -1,15 +1,8 @@
-#include "iostream"
-#include <unistd.h>
 #include <cstdio>
-#include <sys/socket.h>
 #include <cstdlib>
 #include <cstring>
-#include <vector>
-#include <iterator>
-
 #include "RPCImpl.h"
 #include "Connect4.h"
-
 
 using namespace std;
 extern int totalGamesPlayed;
@@ -29,7 +22,7 @@ RPCImpl::~RPCImpl() = default;
  *      buffer: The string to be split
  *      a: The vector to have strings added to
  */
-void RPCImpl::ParseTokens(char* buffer, vector<string>& a) {
+void RPCImpl::parseTokens(char* buffer, vector<string>& a) {
     char* token;
     char* rest = (char*)buffer;
 
@@ -38,17 +31,25 @@ void RPCImpl::ParseTokens(char* buffer, vector<string>& a) {
     }
 }
 
+void RPCImpl::sendResponse(char* buffer) const {
+    int nlen = (int) strlen(buffer);
+    buffer[nlen] = 0;
+    send(this->m_socket, buffer, (int) strlen(buffer) + 1, 0);
+}
+
 /*
  * ProcessRPC will examine buffer and will essentially control the server
  * processes.
  */
-void RPCImpl::ProcessRPC() {
+void RPCImpl::processRPC() {
     char buffer[1024] = { 0 };
     vector<string> arrayTokens;
+    const int RPC_TOKEN = 0;
     int valread;
     bool bConnected = false;
-    const int RPC_TOKEN = 0;
     bool bContinue = true;
+    bool playingGame = false;
+    Connect4* game;
 
     while (bContinue) {
         // Should be blocked when a new RPC has not called us yet
@@ -57,7 +58,7 @@ void RPCImpl::ProcessRPC() {
         }
 
         arrayTokens.clear();
-        this->ParseTokens(buffer, arrayTokens);
+        this->parseTokens(buffer, arrayTokens);
 
         // Enumerate through the tokens. The first token is always the RPC
         for (const auto& x : arrayTokens) {
@@ -67,20 +68,19 @@ void RPCImpl::ProcessRPC() {
             free(token);
         }
 
-        // String statements are not supported with a switch, so using if/else
-        // logic to dispatch.
-        string aString = arrayTokens[RPC_TOKEN];
+        string strRPC = arrayTokens[RPC_TOKEN];
 
-        if (!bConnected && (aString == "connect")) {
-            bConnected = ProcessConnectRPC(arrayTokens);  // Connect RPC
-        } else if (bConnected && aString == "playconnect4") {
-            playConnect4RPC(arrayTokens);
-        } else if (bConnected && aString == "playpiece") {
-            playPieceRPC(arrayTokens);
-        } else if (bConnected && aString == "checkstats") {
+        if (!bConnected && (strRPC == "connect")) {
+            bConnected = processConnectRPC(arrayTokens);
+        } else if (bConnected && strRPC == "playconnect4") {
+            game = playConnect4RPC(arrayTokens);
+            playingGame = true;
+        } else if (bConnected && playingGame && strRPC == "playpiece") {
+            playPieceRPC(game, arrayTokens);
+        } else if (bConnected && strRPC == "checkstats") {
             checkStatsRPC();
-        } else if (bConnected && (aString == "disconnect")) {
-            ProcessDisconnectRPC();
+        } else if (bConnected && (strRPC == "disconnect")) {
+            processDisconnectRPC();
             //cout << "Total games played = " << totalGamesPlayed << endl;
             printf("Disconnected from client.\n\n");
             bContinue = false; // We are going to leave this loop
@@ -98,7 +98,7 @@ void RPCImpl::ProcessRPC() {
  *      - arrayTokens: tokens received from client (Ex.: "connect," "USERNAME,"
  *      and "PASSWORD1234."
  */
-bool RPCImpl::ProcessConnectRPC(vector<string>& arrayTokens) const {
+bool RPCImpl::processConnectRPC(vector<string>& arrayTokens) const {
     const int USERNAME_TOKEN = 1;
     const int PASSWORD_TOKEN = 2;
     bool validLogin;
@@ -128,43 +128,34 @@ bool RPCImpl::ProcessConnectRPC(vector<string>& arrayTokens) const {
     else return false;
 }
 
-void RPCImpl::playConnect4RPC(vector<string>& arrayTokens)  {
-    // TODO
-    //Everything below is temporary
-
+Connect4* RPCImpl::playConnect4RPC(vector<string>& arrayTokens)  {
     auto* game = new Connect4();
+    string strBoard = game->boardToString().append(";");
 
     char szBuffer[50];
-    strcpy(szBuffer, "******************************************;");
+    strcpy(szBuffer, strBoard.c_str());
 
-    // Send Response back on our socket
-    int nlen = (int) strlen(szBuffer);
-    szBuffer[nlen] = 0;
-    send(this->m_socket, szBuffer, (int) strlen(szBuffer) + 1, 0);
+    // Send response back on our socket.
+    sendResponse(szBuffer);
 
-    //Mutex code to increment the number of games played by each client
-    // It seems to only count 1 game per client for now
-    // number is displayed in ProcessRPC, right after token disconnect is received
+    // Mutex code to increment the number of games played by each client.
     pthread_mutex_lock(&myMutex);
-    //increment
     totalGamesPlayed++;
     pthread_mutex_unlock(&myMutex);
-    //end Mutex code
 
     // TODO add ability for player to choose if computer or player takes first turn
 }
 
-void RPCImpl::playPieceRPC(vector<string>& arrayTokens) const {
+void RPCImpl::playPieceRPC(Connect4* game, vector<string>& arrayTokens) const {
     // TODO
     //Everything below is temporary
     char szBuffer[50];
     strcpy(szBuffer, "******************************************;9;");
 
-    // Send Response back on our socket
-    int nlen = (int) strlen(szBuffer);
-    szBuffer[nlen] = 0;
-    send(this->m_socket, szBuffer, (int) strlen(szBuffer) + 1, 0);
+    // Send response back on our socket
+    sendResponse(szBuffer);
 }
+
 void RPCImpl::checkStatsRPC() const {
     // TODO
     string s = to_string(totalGamesPlayed);
@@ -173,22 +164,17 @@ void RPCImpl::checkStatsRPC() const {
     char szBuffer[16];
     strcpy(szBuffer, pchar);
 
-    // Send Response back on our socket
-    int nlen = (int) strlen(szBuffer);
-    szBuffer[nlen] = 0;
-    send(this->m_socket, szBuffer, (int) strlen(szBuffer) + 1, 0);
-
+    // Send response back on our socket
+    sendResponse(szBuffer);
 }
 
 /*
  * Processes disconnectRPC.
 */
-void RPCImpl::ProcessDisconnectRPC() const {
+void RPCImpl::processDisconnectRPC() const {
     char szBuffer[16];
     strcpy(szBuffer, "1;");
 
-    // Send Response back on our socket
-    int nlen = (int) strlen(szBuffer);
-    szBuffer[nlen] = 0;
-    send(this->m_socket, szBuffer, (int) strlen(szBuffer) + 1, 0);
+    // Send response back on our socket
+    sendResponse(szBuffer);
 }

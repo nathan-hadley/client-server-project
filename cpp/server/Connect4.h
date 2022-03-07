@@ -8,14 +8,14 @@ public:
     Connect4();
     bool clientDrop(int dropChoice);
     void computerDrop();
+    bool fullBoard();
     bool checkFour(bool client);
+    string boardToString();
 
 private:
     char board[7][6];
-    string strBoard;
 
     void restart();
-    bool fullBoard();
     void playerWin (bool client);
 };
 

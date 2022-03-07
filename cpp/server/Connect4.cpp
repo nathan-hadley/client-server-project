@@ -1,4 +1,5 @@
 #include <string>
+#include <sstream>
 #include "Connect4.h"
 using namespace std;
 
@@ -70,6 +71,16 @@ bool Connect4::fullBoard() {
     if (full == 7)
         return true;
     else return false;
+}
+
+string Connect4::boardToString() {
+    stringstream ss;
+    for (int i = 0; i < 6; i++) {
+        for (int j = 0; j < 7; j++) {
+            ss << board[i][j];
+        }
+    }
+    return ss.str();
 }
 
 /**
