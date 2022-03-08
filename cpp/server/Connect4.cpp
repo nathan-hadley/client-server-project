@@ -59,6 +59,7 @@ int Connect4::computerDrop() {
 
     // Get most up-to-date board.
     stringToBoard();
+    // This loops seems to run forever when debugging
     do {
         dropChoice = rand() % 7;
     } while (board[0][dropChoice] != '*');
@@ -90,13 +91,13 @@ bool Connect4::fullBoard() {
 }
 
 string Connect4::boardToString() {
-    string result;
+    //string result;
     for (int i = 0; i <= 6; i++) {
         for (int j = 0; j <= 7; j++) {
-             result += board[i][j];
+             boardString += board[i][j];
         }
     }
-    return result;
+    return boardString;
 }
 
 //void Connect4::boardToString() {
@@ -110,14 +111,24 @@ string Connect4::boardToString() {
 //}
 
 void Connect4::stringToBoard() {
-    int count = 0;
-    for (int i = 0; i <= 6; i++) {
-        for (int j = 0; j <= 7; j++) {
-            board[i][j] = boardString->at(count);
-            count++;
+    for (int i = 0; i <= 6; i++)
+    {
+        for(int j = 0; j <= 7; j++)
+        {
+            board[i][j] = boardString[j + (i * 7)];
         }
     }
+
 }
+//void Connect4::stringToBoard() {
+//    int count = 0;
+//    for (int i = 0; i <= 6; i++) {
+//        for (int j = 0; j <= 7; j++) {
+//            board[i][j] = boardString.at(count);
+//            count++;
+//        }
+//    }
+//}
 
 /**
  * Checks for four-in-a-row.

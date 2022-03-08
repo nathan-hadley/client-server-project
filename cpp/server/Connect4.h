@@ -14,7 +14,7 @@ public:
     bool checkFour(bool client);
 
 private:
-    string* boardString;
+    string boardString;
     char board[6][7]{};
 
     string boardToString();

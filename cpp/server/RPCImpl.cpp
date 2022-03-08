@@ -153,7 +153,7 @@ Connect4* RPCImpl::playConnect4RPC(vector<string>& arrayTokens)  {
     return game;
 }
 
-void RPCImpl::playPieceRPC(Connect4* game, vector<string>& arrayTokens) const {
+void RPCImpl::playPieceRPC(Connect4* gamePlay, vector<string>& arrayTokens) const {
     // Get column choice token
     const int COLUMN_TOKEN = 1;
     int columnChoice = stoi(arrayTokens[COLUMN_TOKEN]);
@@ -161,34 +161,34 @@ void RPCImpl::playPieceRPC(Connect4* game, vector<string>& arrayTokens) const {
     int response;
 
     // If column is full.
-    if (!game->clientDrop(columnChoice-1)) {
+    if (!gamePlay->clientDrop(columnChoice-1)) {
         response = 8;
     }
 
     else {
         // Check if client wins.
-        if (game->checkFour(true))
+        if (gamePlay->checkFour(true))
             // If client wins
             response = 9;
-        else if (game->fullBoard())
+        else if (gamePlay->fullBoard())
             // If board is full.
             response = 11;
         else {
             // Computer moves. Save move to response.
-            response = game->computerDrop();
+            response = gamePlay->computerDrop();
             // Check if computer wins.
-            if (game->checkFour(false))
+            if (gamePlay->checkFour(false))
                 response = 10;
         }
     }
 
     // Convert board array to string to send back on socket.
-    string strBoard = game->getBoardString().append(";");
+    string strBoard = gamePlay->getBoardString().append(";");
 
     // Append response to board.
     strBoard.append(to_string(response)).append(";");
 
-    char szBuffer[50];
+    char szBuffer[200];
     strcpy(szBuffer, strBoard.c_str());
 
     // Send response back on our socket
