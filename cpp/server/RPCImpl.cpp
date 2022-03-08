@@ -188,8 +188,8 @@ void RPCImpl::playPieceRPC(Connect4* gamePlay, vector<string>& arrayTokens) cons
     // Append response to board.
     strBoard.append(to_string(response)).append(";");
 
-    char szBuffer[200];
-    strcpy(szBuffer, strBoard.c_str());
+    char szBuffer[1024];
+    snprintf(szBuffer, 1024, "%s", strBoard.c_str());
 
     // Send response back on our socket
     sendResponse(szBuffer);
